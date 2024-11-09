@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skill Swap - Registro</title>
+  <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+  <div class="container">
+    <div class="logo-container">
+      <img src="./img/Logo-SkillSwap.png" alt="Logo" class="logo" />
+      <h2 class="name">Skill Swap</h2>
+    </div>
+
+    <div class="content">
+      <h1 class="titulo">Cadastro</h1>
+
+      <!-- Tabs de Usuário e Empresa -->
+      <div class="tabs">
+        <div class="tab" id="userTab" onclick="showUserForm()">Usuário</div>
+        <div class="tab" id="companyTab" onclick="showCompanyForm()">Empresa</div>
+      </div>
+
+      <div class="form-container">
+        <!-- Formulário de Usuário -->
+        <form id="userForm" class="formulario">
+          <h2 class="form-title">Usuário</h2>
+          <div class="campo">
+            <label for="userUsername">Nome de usuário</label>
+            <input type="text" id="userUsername" placeholder="Digite seu nome de usuário" required />
+          </div>
+
+          <div class="campo">
+            <label for="userEmail">Email</label>
+            <input type="email" id="userEmail" placeholder="Digite seu email" required />
+          </div>
+
+          <div class="campo">
+            <label for="userPassword">Senha</label>
+            <input type="password" id="userPassword" placeholder="Digite sua senha" required />
+          </div>
+
+          <button type="submit" class="btn-login">Registrar</button>
+        </form>
+
+        <!-- Formulário de Empresa -->
+        <form id="companyForm" class="formulario">
+          <h2 class="form-title">Empresa</h2>
+          <div class="campo">
+            <label for="companyName">Nome da Empresa</label>
+            <input type="text" id="companyName" placeholder="Digite o nome da empresa" required />
+          </div>
+
+          <div class="campo">
+            <label for="companyEmail">Email da Empresa</label>
+            <input type="email" id="companyEmail" placeholder="Digite o email da empresa" required />
+          </div>
+
+          <div class="campo">
+            <label for="companyPassword">Senha</label>
+            <input type="password" id="companyPassword" placeholder="Digite a senha" required />
+          </div>
+
+          <div class="campo">
+            <label for="companyCNPJ">CNPJ</label>
+            <input type="text" id="companyCNPJ" placeholder="Digite o CNPJ da empresa" required />
+          </div>
+
+          <button type="submit" class="btn-login">Registrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="cadastro.js"></script>
+</body>
+</html>

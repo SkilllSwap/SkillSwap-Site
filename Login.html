@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skill Swap - Login</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="container">
+    <div class="logo-container">
+      <img src="./img/Logo-SkillSwap.png" alt="Logo" class="logo" />
+      <h2 class="name">Skill Swap</h2>
+    </div>
+
+    <div class="content1">
+      <h1 class="titulo">Login</h1>
+
+      <form id="loginForm" class="formulario">
+        <div class="campo">
+          <label for="username">Usuário</label>
+          <input type="text" id="username" placeholder="Digite seu usuário" required />
+        </div>
+
+        <div class="campo">
+          <label for="password">Senha</label>
+          <input type="password" id="password" placeholder="Digite sua senha" required />
+        </div>
+
+        <a href="redefinirSenha.html" class="esqueceu-senha">Esqueceu a senha?</a>
+
+        <button type="submit" class="btn-login">Entrar</button>
+
+        <label class="CadastrarLabel" for="CadastrarLabel">Não possui uma conta?</label>
+        <a href="Cadastro.html" class="Cadastrar">Cadastre-se aqui</a>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

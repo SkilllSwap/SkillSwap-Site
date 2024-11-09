@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feed de Vagas - Skill Swap</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="navbar">
+        <!-- Logo e nome dentro da navbar -->
+        <div class="logo-container">
+          <img src="../img/Logo-SkillSwap.png" alt="Logo" class="logo" />
+          <h2 class="name">Skill Swap</h2>
+        </div>
+
+        <!-- Menu de navegação -->
+        <ul class="nav-links">
+          <li><a href="#home">Feed de Vagas</a></li>
+          <li><a href="#feed">Pesquisa </a></li>
+          <li><a href="#sobre">Notificações</a></li>
+          <li><a href="#contato">Perfil</a></li>
+        </ul>
+    </div>
+
+    <div class="feed-container">
+        <div class="title">Feed de Vagas</div>
+
+        <div class="card-container" id="card-container">
+        </div>
+
+        <div class="navigation">
+          <div class="nav-button" onclick="previousVaga()">&#9664;</div>
+          <div class="nav-button" onclick="nextVaga()">&#9654;</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

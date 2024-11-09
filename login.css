@@ -1,0 +1,203 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+    height: 100vh;
+    padding: 8px;
+    position: relative;
+    margin: 0;
+  }
+  
+  .logo-container {
+    position: absolute;
+    top: 20px; 
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+  }
+  
+  .logo {
+    width: 130px; 
+    height: auto; 
+    margin-bottom: 0px;
+  }
+  
+  .name {
+    margin: 20px;
+    font-size: 24px;
+    color: #f0f8ff;
+    text-shadow: 
+      0px 0px 10px rgba(151, 32, 255, 0.8),
+      0px 0px 20px rgba(151, 32, 255, 0.9), 
+      0px 0px 30px rgba(151, 32, 255, 1);  
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 300;
+  }
+  
+  .content1 {
+    text-align: center;
+    position: relative;
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    background-color: #222222; 
+    border-radius: 20px;
+    box-shadow: 
+      0px 0px 10px rgba(151, 32, 255, 0.8),
+      0px 0px 20px rgba(151, 32, 255, 0.9), 
+      0px 0px 30px rgba(151, 32, 255, 1);
+  }
+  
+  .titulo {
+    margin: 20px;
+    font-size: 35px;
+    color: #f0f8ff;
+    text-shadow: 
+      0px 0px 10px rgba(151, 32, 255, 0.8),
+      0px 0px 20px rgba(151, 32, 255, 0.9), 
+      0px 0px 30px rgba(151, 32, 255, 1);  
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 300;
+  }
+  
+  .formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+  
+  .campo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .campo label {
+    color: #f0f8ff;
+    margin-bottom: 5px;
+    font-weight: 300;
+  }
+  
+  .campo input {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #f0f8ff;
+    border-radius: 5px;
+    background-color: #1e1e1e; 
+    color: #f0f8ff;
+    font-size: 16px;
+  }
+  
+  .campo input:focus {
+    outline: none;
+    border-color: rgba(151, 32, 255, 1); 
+    box-shadow: 0 0 5px rgba(151, 32, 255, 0.8);
+  }
+  
+  .btn-login {
+    background-color: rgba(151, 32, 255, 1);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(151, 32, 255, 1);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-login:hover {
+    background-color: rgba(151, 32, 255, 0.8);
+    box-shadow: 0 0 15px rgba(151, 32, 255, 1);
+  }
+  
+  .esqueceu-senha {
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    text-decoration: none;
+    margin-top: -30px;
+    align-self: flex-start; 
+    padding: 5px;
+  }
+  
+  .esqueceu-senha:hover {
+    color: rgba(151, 32, 255, 0.8); 
+    text-decoration: underline;
+  }
+  
+  .CadastrarLabel {
+    color: #f0f8ff;
+    margin-bottom: 5px;
+    font-weight: 300;
+  }
+  
+  .Cadastrar {
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    text-decoration: none;
+    margin-top: -30px;
+    padding: 5px;
+  }
+  
+  .Cadastrar:hover {
+    color: rgba(151, 32, 255, 0.8); 
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    .logo {
+      width: 100px; 
+    }
+  
+    .content {
+      padding: 15px;
+      max-width: 90%; 
+    }
+  
+    .titulo {
+      font-size: 30px; 
+    }
+  
+    .btn-login {
+      font-size: 18px;
+      padding: 8px 16px; 
+    }
+  
+    .campo input {
+      font-size: 14px; 
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .logo {
+      width: 80px; 
+    }
+  
+    .content {
+      padding: 10px;
+      max-width: 95%; 
+    }
+  
+    .titulo {
+      font-size: 26px; 
+    }
+  
+    .btn-login {
+      font-size: 16px;
+      padding: 6px 12px; 
+    }
+  
+    .campo input {
+      font-size: 12px; 
+    }
+  
+    .esqueceu-senha, .Cadastrar {
+      font-size: 12px; 
+    }
+  }
+  
