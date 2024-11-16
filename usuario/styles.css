@@ -167,4 +167,291 @@ body {
     position: absolute;
     right: -100px;
   }
-  
+  /* Descrição */
+body {
+  background-color: #222222;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #f0f8ff;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center; 
+  align-items: center;  
+}
+
+
+/* Feed Container */
+.feed-container {
+  width: 80%;
+  max-width: 1000px; 
+  background-color: #333333;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 0 20px rgba(151, 32, 255, 0.8), 0 0 40px rgba(151, 32, 255, 0.9);
+  margin-top: 120px;
+  position: relative;
+}
+
+/* Job Title */
+.title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #d8b4fe;
+  text-shadow: 
+    0 0 10px rgba(151, 32, 255, 0.8),
+    0 0 20px rgba(151, 32, 255, 0.9),
+    0 0 30px rgba(151, 32, 255, 1);
+}
+
+/* Top Buttons */
+.top-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.top-button {
+  background-color: #6a00ff00;
+  color: white;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.top-button:hover {
+  background-color: #9720ffcc;
+}
+
+/* Info Container */
+.info-container {
+  margin-top: 20px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.info-text {
+  color: #fff;
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+.description {
+  color: #fff;
+  margin-top: 20px;
+  line-height: 24px;
+}
+
+.requirements, .resume {
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 0 0 8px #6a00ff;
+  margin-top: 20px;
+}
+
+.button {
+  background-color: #9720ffcc;
+  padding: 15px;
+  border-radius: 10px;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.button:hover {
+  background-color: #5500cc;
+}
+
+/*-----------------------------------------------*/
+/* Body */
+body {
+  background-color: #222222;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #f0f8ff;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Feed Container */
+.feed-container {
+  width: 80%;
+  max-width: 1000px;
+  background-color: #333333;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 0 20px rgba(151, 32, 255, 0.8), 0 0 40px rgba(151, 32, 255, 0.9);
+  margin-top: 120px;
+  position: relative;
+}
+
+.title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #d8b4fe;
+  text-shadow: 
+    0 0 10px rgba(151, 32, 255, 0.8),
+    0 0 20px rgba(151, 32, 255, 0.9),
+    0 0 30px rgba(151, 32, 255, 1);
+}
+
+/* Formulário */
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.input,
+select {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #ffffff;
+  background-color: #333333;
+  color: #fff;
+  font-size: 16px;
+}
+
+.input:focus,
+select:focus {
+  border-color: #9720ff;
+  outline: none;
+}
+/* Ajuste específico para o select de Nível de Escolaridade */
+#nivelEscolaridade {
+  width: 100%; /* Mantém a largura total dentro do formulário */
+  max-width: 300px; /* Limita a largura do select */
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #ffffff;
+  background-color: #333333;
+  color: #fff;
+  font-size: 16px;
+}
+
+#nivelEscolaridade:focus {
+  border-color: #9720ff;
+  outline: none;
+}
+
+.label {
+  color: #ffffff;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+  align-items: flex-start;
+}
+
+.radio-group label {
+  margin: 5px 0;
+  color: #fff;
+}
+
+.radio-group input[type="radio"] {
+  margin-right: 8px;
+}
+
+/* Ajustes para os campos de data */
+.date-range {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+}
+
+.date-range .input {
+  width: 48%; /* Para garantir que ambos os campos de data fiquem na mesma linha */
+}
+
+/* Botão */
+.button {
+  background-color: #9720ffcc;
+  padding: 15px;
+  border-radius: 10px;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.button:hover {
+  background-color: #5500cc;
+}
+
+input[type="date"],
+input[type="text"] {
+  background-color: #333333;
+}
+
+/* Ajuste para centralizar as opções do Horário Letivo */
+.radio-group {
+  display: flex;
+  flex-direction: row;  /* Alinha as opções em linha */
+  justify-content: center;  /* Centraliza as opções horizontalmente */
+  align-items: center;  /* Centraliza as opções verticalmente */
+  margin: 10px 0;
+}
+
+.radio-group label {
+  margin: 0 15px;  /* Dá espaço entre as opções */
+  color: #fff;
+  font-size: 16px;
+}
+
+.radio-group input[type="radio"] {
+  margin-right: 8px;  /* Espaço entre o botão de opção e o texto */
+}
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px;
+  }
+
+  .feed-container {
+    width: 90%;
+    padding: 10px;
+  }
+
+  .input,
+  select,
+  .button {
+    max-width: 100%;
+  }
+
+  .date-range {
+    flex-direction: column;
+  }
+
+  .date-range .input {
+    width: 100%;
+  }
+}
