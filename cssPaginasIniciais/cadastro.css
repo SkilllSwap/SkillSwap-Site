@@ -115,7 +115,7 @@
   }
   
   .formulario.active {
-    display: flex;
+    display: block;
   }
   
   .form-title {

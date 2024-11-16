@@ -1,15 +1,74 @@
-document.getElementById("loginForm")?.addEventListener("submit", function(event) {
-    event.preventDefault(); // Impede o envio tradicional do formulário
-  
-    // Aqui você pode adicionar validações de usuário e senha se necessário
-    const usuario = document.getElementById("username").value;
-    const senha = document.getElementById("password").value;
-  
-    if (usuario && senha) {
-      // Redireciona para a página do feed de vagas após login bem-sucedido
-      window.location.href = "./usuario/FeedVagas.html";
-    } else {
-      alert("Por favor, preencha usuário e senha.");
+import { auth, db, signInWithEmailAndPassword, doc, getDoc } from './firebaseConfig.js';
+
+// Função para exibir alertas
+function showAlert(message) {
+  alert(message);
+}
+
+// Função para verificar se o usuário existe nas coleções "Usuários" ou "Empresas"
+async function checkUserType(uid) {
+  try {
+    // Verificar na coleção "Usuários"
+    const userDocRef = doc(db, 'Usuário', uid);
+    const userDoc = await getDoc(userDocRef);
+
+    if (userDoc.exists()) {
+      console.log('Usuário encontrado na coleção "Usuário"');
+      return 'user'; // Se encontrado como usuário
+    }
+
+    // Verificar na coleção "Empresas"
+    const companyDocRef = doc(db, 'Empresa', uid);
+    const companyDoc = await getDoc(companyDocRef);
+
+    if (companyDoc.exists()) {
+      console.log('Usuário encontrado na coleção "Empresa"');
+      return 'company'; // Se encontrado como empresa
+    }
+
+    // Caso o usuário não seja encontrado em nenhuma coleção
+    console.log('Usuário não encontrado em nenhuma coleção');
+    return null;
+  } catch (error) {
+    console.error("Erro ao verificar usuário:", error);
+    showAlert("Erro ao verificar usuário no banco de dados");
+    return null;
+  }
+}
+
+// Aguarda o carregamento do DOM antes de executar o código
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('loginForm').addEventListener('submit', async function (event) {
+    event.preventDefault(); // Prevenir o envio do formulário
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    if (!email || !password) {
+      showAlert('Por favor, preencha todos os campos.');
+      return;
+    }
+
+    try {
+      // Realizando o login
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user; // Pegando o usuário autenticado
+
+      // Verificando o tipo de usuário (se é "Usuário" ou "Empresa")
+      const userType = await checkUserType(user.uid);
+
+      if (userType === 'user') {
+        showAlert('Login feito com sucesso! Redirecionando para a página de usuário...');
+        window.location.href = './usuario/FeedVaga.html'; // Redirecionar para a página de usuário
+      } else if (userType === 'company') {
+        showAlert('Login feito com sucesso! Redirecionando para a página de empresa...');
+        window.location.href = './pagina1.html'; // Redirecionar para a página de empresa
+      } else {
+        showAlert('Usuário não encontrado em nenhuma coleção.');
+      }
+    } catch (error) {
+      console.error('Erro ao fazer login:', error);
+      showAlert('Erro ao fazer login: ' + error.message);
     }
   });
-  
+});

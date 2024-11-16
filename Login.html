@@ -18,8 +18,8 @@
 
       <form id="loginForm" class="formulario">
         <div class="campo">
-          <label for="username">Usuário</label>
-          <input type="text" id="username" placeholder="Digite seu usuário" required />
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Digite seu email" required />
         </div>
 
         <div class="campo">
@@ -28,15 +28,17 @@
         </div>
 
         <a href="redefinirSenha.html" class="esqueceu-senha">Esqueceu a senha?</a> 
+        
 
         <button type="submit" class="btn-login">Entrar</button>
 
-        <label class="CadastrarLabel" for="CadastrarLabel">Não possui uma conta?</label>
+        <label class="CadastrarLabel">Não possui uma conta?</label>
         <a href="Cadastro.html" class="Cadastrar">Cadastre-se aqui</a>
       </form>
     </div>
   </div>
 
-  <script src="login.js"></script>
+  <script type="module" src="firebaseConfig.js"></script>
+  <script type="module" src="login.js"></script>
 </body>
 </html>
