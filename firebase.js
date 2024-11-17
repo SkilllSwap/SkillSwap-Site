@@ -1,37 +1,21 @@
 import { auth, db, createUserWithEmailAndPassword, setDoc, doc } from './firebaseConfig.js';
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Função para mostrar o formulário de Usuário
-    function showUserForm() {
-        document.getElementById('userTab').classList.add('active');
-        document.getElementById('companyTab').classList.remove('active');
-        document.getElementById('userForm').classList.add('active');
-        document.getElementById('companyForm').classList.remove('active');
-    }
 
-    // Função para mostrar o formulário de Empresa
-    function showCompanyForm() {
-        document.getElementById('companyTab').classList.add('active');
-        document.getElementById('userTab').classList.remove('active');
-        document.getElementById('companyForm').classList.add('active');
-        document.getElementById('userForm').classList.remove('active');
-    }
-
-    // Inicialização: Exibe o formulário de Usuário por padrão
-    showUserForm();
-
-    // Função de validação de formulário de Usuário
+    //validação de formulário Usuário
     function validateUserForm() {
-        const username = document.getElementById('userUsername').value;
+        const cpf = document.getElementById('userCpf').value;
+        const dataNascimento = document.getElementById('userDataNascimento').value;
         const email = document.getElementById('userEmail').value;
         const password = document.getElementById('userPassword').value;
+        const nome = document.getElementById('userNome').value;
+        const telefone = document.getElementById('userTelefone').value;
 
-        if (!username || !email || !password) {
+        if (!cpf || !dataNascimento || !email || !password || !nome || !telefone) {
             alert('Por favor, preencha todos os campos.');
             return false;
         }
 
-        // Validação de email simples
         const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
         if (!emailRegex.test(email)) {
             alert('Email inválido.');
@@ -41,67 +25,45 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 
-    // Função de validação de formulário de Empresa
-    function validateCompanyForm() {
-        const name = document.getElementById('companyName').value;
-        const email = document.getElementById('companyEmail').value;
-        const password = document.getElementById('companyPassword').value;
-        const cnpj = document.getElementById('companyCNPJ').value;
-
-        if (!name || !email || !password || !cnpj) {
-            alert('Por favor, preencha todos os campos.');
-            return false;
-        }
-
-        // Validação de email simples
-        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-        if (!emailRegex.test(email)) {
-            alert('Email inválido.');
-            return false;
-        }
-
-        return true;
-    }
-
-    // Função para enviar o formulário de Usuário
-    document.getElementById('userForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        if (validateUserForm()) {
-            registerUser();
-        }
-    });
-
-    // Função para enviar o formulário de Empresa
-    document.getElementById('companyForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        if (validateCompanyForm()) {
-            registerCompany();
-        }
-    });
-
-    // Função de registro no Firebase para Usuário
+    //registro no Firebase Usuário
     async function registerUser() {
         const email = document.getElementById('userEmail').value;
         const password = document.getElementById('userPassword').value;
-        const username = document.getElementById('userUsername').value;
+        const nome = document.getElementById('userNome').value;
+        const cpf = document.getElementById('userCpf').value;
+        const dataNascimento = document.getElementById('userDataNascimento').value;
+        const telefone = document.getElementById('userTelefone').value;
 
         try {
-            // Utilizando Firebase Auth para criar o usuário
+            console.log('Tentando registrar usuário com e-mail:', email);
+
+            // Criar usuário 
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
 
-            // Salvando informações adicionais no Firestore
-            const userRef = doc(db, 'users', user.uid);
-            await setDoc(userRef, {
-                username: username,
+            console.log('Usuário criado com sucesso:', user.uid); 
+
+            // Verificar se os dados estão corretos 
+            console.log('Dados do usuário a serem salvos:', {
+                cpf: cpf,
+                data_nascimento: dataNascimento,
                 email: email,
+                nome: nome,
+                telefone: telefone,
+            });
+
+            const userRef = doc(db, 'Usuário', user.uid); 
+            console.log('Salvando dados do usuário na coleção "Usuário"...');
+            await setDoc(userRef, {
+                cpf: cpf,
+                data_nascimento: dataNascimento,
+                email: email,
+                nome: nome,
+                telefone: telefone,
             });
 
             alert('Usuário cadastrado com sucesso!');
-            // Resetando o formulário
             document.getElementById('userForm').reset();
-
-            // Redirecionando para a página de feed de vagas
             window.location.href = "./usuario/FeedVagas.html";  
         } catch (error) {
             console.error('Erro ao cadastrar usuário:', error);
@@ -109,31 +71,38 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Função de registro no Firebase para Empresa
+    //enviar dados do Usuário
+    document.getElementById('userForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (validateUserForm()) {
+            registerUser();
+        }
+    });
+
+    //registro no Firebase Empresa
     async function registerCompany() {
         const email = document.getElementById('companyEmail').value;
         const password = document.getElementById('companyPassword').value;
-        const companyName = document.getElementById('companyName').value;
+        const nome = document.getElementById('companyNome').value;
         const cnpj = document.getElementById('companyCNPJ').value;
+        const dataFundacao = document.getElementById('companyDataFundacao').value;
+        const telefone = document.getElementById('companyTelefone').value;
 
         try {
-            // Utilizando Firebase Auth para criar a empresa
             const companyCredential = await createUserWithEmailAndPassword(auth, email, password);
             const company = companyCredential.user;
 
-            // Salvando informações adicionais no Firestore
-            const companyRef = doc(db, 'companies', company.uid);
+            const companyRef = doc(db, 'Empresa', company.uid);
             await setDoc(companyRef, {
-                companyName: companyName,
                 cnpj: cnpj,
+                data_fundacao: dataFundacao,
                 email: email,
+                nome: nome,
+                telefone: telefone,
             });
 
             alert('Empresa cadastrada com sucesso!');
-            // Resetando o formulário
             document.getElementById('companyForm').reset();
-
-            // Redirecionando para a página de feed de empresas
             window.location.href = "pagina2.html";  
         } catch (error) {
             console.error('Erro ao cadastrar empresa:', error);
@@ -141,7 +110,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Adicionar eventos de clique aos tabs
+    // alternar entre os formulários
+    function showUserForm() {
+        document.getElementById('userTab').classList.add('active');
+        document.getElementById('companyTab').classList.remove('active');
+        document.getElementById('userForm').classList.add('active');
+        document.getElementById('companyForm').classList.remove('active');
+    }
+
+    function showCompanyForm() {
+        document.getElementById('companyTab').classList.add('active');
+        document.getElementById('userTab').classList.remove('active');
+        document.getElementById('companyForm').classList.add('active');
+        document.getElementById('userForm').classList.remove('active');
+    }
+
+    //eventos de clique no tabs
     const userTab = document.getElementById('userTab');
     const companyTab = document.getElementById('companyTab');
 
@@ -149,4 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
         userTab.addEventListener('click', showUserForm);
         companyTab.addEventListener('click', showCompanyForm);
     }
+
+    //começar com o formulário de Usuário
+    showUserForm();
 });

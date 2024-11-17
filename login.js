@@ -1,32 +1,32 @@
 import { auth, db, signInWithEmailAndPassword, doc, getDoc } from './firebaseConfig.js';
 
-// Função para exibir alertas
+//alertas
 function showAlert(message) {
   alert(message);
 }
 
-// Função para verificar se o usuário existe nas coleções "Usuários" ou "Empresas"
+// verificar se o usuário existe nas coleções 
 async function checkUserType(uid) {
   try {
-    // Verificar na coleção "Usuários"
+    // Verificar no Usuário
     const userDocRef = doc(db, 'Usuário', uid);
     const userDoc = await getDoc(userDocRef);
 
     if (userDoc.exists()) {
       console.log('Usuário encontrado na coleção "Usuário"');
-      return 'user'; // Se encontrado como usuário
+      return 'user'; // Se encontrado o usuário
     }
 
-    // Verificar na coleção "Empresas"
+    // Verificar na Empresa 
     const companyDocRef = doc(db, 'Empresa', uid);
     const companyDoc = await getDoc(companyDocRef);
 
     if (companyDoc.exists()) {
       console.log('Usuário encontrado na coleção "Empresa"');
-      return 'company'; // Se encontrado como empresa
+      return 'company'; // Se encontrado a empresa
     }
 
-    // Caso o usuário não seja encontrado em nenhuma coleção
+    // Caso o usuário não seja encontrado 
     console.log('Usuário não encontrado em nenhuma coleção');
     return null;
   } catch (error) {
@@ -36,7 +36,7 @@ async function checkUserType(uid) {
   }
 }
 
-// Aguarda o carregamento do DOM antes de executar o código
+// carregamento do DOM antes de executar o código
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('loginForm').addEventListener('submit', async function (event) {
     event.preventDefault(); // Prevenir o envio do formulário
@@ -52,17 +52,17 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       // Realizando o login
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user; // Pegando o usuário autenticado
+      const user = userCredential.user; // usuário autenticado
 
-      // Verificando o tipo de usuário (se é "Usuário" ou "Empresa")
+      // Verificando o tipo de usuário 
       const userType = await checkUserType(user.uid);
 
       if (userType === 'user') {
         showAlert('Login feito com sucesso! Redirecionando para a página de usuário...');
-        window.location.href = './usuario/FeedVaga.html'; // Redirecionar para a página de usuário
+        window.location.href = './usuario/FeedVaga.html';
       } else if (userType === 'company') {
         showAlert('Login feito com sucesso! Redirecionando para a página de empresa...');
-        window.location.href = './pagina1.html'; // Redirecionar para a página de empresa
+        window.location.href = './pagina1.html';
       } else {
         showAlert('Usuário não encontrado em nenhuma coleção.');
       }

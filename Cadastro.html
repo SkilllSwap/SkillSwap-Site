@@ -26,9 +26,25 @@
         <!-- Formulário de Usuário -->
         <form id="userForm" class="formulario">
           <h2 class="form-title">Usuário</h2>
+          
           <div class="campo">
-            <label for="userUsername">Nome de usuário</label>
-            <input type="text" id="userUsername" placeholder="Digite seu nome de usuário" required />
+            <label for="userCpf">CPF</label>
+            <input type="text" id="userCpf" placeholder="Digite seu CPF" required />
+          </div>
+
+          <div class="campo">
+            <label for="userUsername">Nome</label>
+            <input type="text" id="userNome" placeholder="Digite seu nome" required />
+          </div>
+
+          <div class="campo">
+            <label for="userBirthDate">Data de Nascimento</label>
+            <input type="date" id="userDataNascimento" required />
+          </div>
+
+          <div class="campo">
+            <label for="userPhone">Telefone</label>
+            <input type="text" id="userTelefone" placeholder="Digite seu telefone" required />
           </div>
 
           <div class="campo">
@@ -41,15 +57,36 @@
             <input type="password" id="userPassword" placeholder="Digite sua senha" required />
           </div>
 
+          <div class="campo">
+            <label for="userImage">Imagem de Perfil</label>
+            <input type="file" id="userImage" accept="image/*" required />
+          </div>
+
           <button type="submit" class="btn-login">Registrar</button>
         </form>
 
         <!-- Formulário de Empresa -->
         <form id="companyForm" class="formulario">
           <h2 class="form-title">Empresa</h2>
+
+          <div class="campo">
+            <label for="companyCNPJ">CNPJ</label>
+            <input type="text" id="companyCNPJ" placeholder="Digite o CNPJ da empresa" required />
+          </div>
+
           <div class="campo">
             <label for="companyName">Nome da Empresa</label>
-            <input type="text" id="companyName" placeholder="Digite o nome da empresa" required />
+            <input type="text" id="companyNome" placeholder="Digite o nome da empresa" required />
+          </div>
+
+          <div class="campo">
+            <label for="companyFoundingDate">Data de Fundação</label>
+            <input type="date" id="companyDataFundacao" required />
+          </div>
+
+          <div class="campo">
+            <label for="companyPhone">Telefone</label>
+            <input type="text" id="companyTelefone" placeholder="Digite o telefone da empresa" required />
           </div>
 
           <div class="campo">
@@ -62,19 +99,13 @@
             <input type="password" id="companyPassword" placeholder="Digite a senha" required />
           </div>
 
-          <div class="campo">
-            <label for="companyCNPJ">CNPJ</label>
-            <input type="text" id="companyCNPJ" placeholder="Digite o CNPJ da empresa" required />
-          </div>
-
           <button type="submit" class="btn-login">Registrar</button>
         </form>
       </div>
     </div>
   </div>
 
-  <!-- Importando o arquivo JS como um módulo -->
   <script type="module" src="firebaseConfig.js"></script>
-  <script type="module" src="firebase.js"></script> <!-- Incluindo o script JS que contém a lógica -->
+  <script type="module" src="firebase.js"></script> 
 </body>
 </html>
