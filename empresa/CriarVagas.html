@@ -26,26 +26,23 @@
 
     <div class="scroll-container">
 
-      <input type="text" class="input" placeholder="Título da Vaga">
-
-      <input type="text" class="input" placeholder="Local">
-
-      <input type="text" class="input" placeholder="Salário">
-
-      <input type="text" class="input" placeholder="Modelo de Trabalho">
-
-      <textarea class="input large-input" placeholder="Informações sobre a vaga"></textarea>
-
-      <input type="text" class="input" placeholder="Exigências">
-
-      <input type="text" class="input" placeholder="Resumo">
-
+      <input type="text" class="input" id="vagaTitulo" placeholder="Título da Vaga">
+      <input type="text" class="input" id="vagaArea" placeholder="Área da Vaga">
+      <input type="text" class="input" id="vagaBeneficios" placeholder="Benefícios">
+      <input type="text" class="input" id="vagaLocalizacao" placeholder="Localização">
+      <input type="text" class="input" id="vagaSalario" placeholder="Salário">
+      <input type="text" class="input" id="vagaFormaTrabalho" placeholder="Forma de Trabalho">
+      <textarea class="input large-input" id="vagaDescricao" placeholder="Descrição da vaga"></textarea>
+      <input type="text" class="input" id="vagaExigencias" placeholder="Exigências">
+      
       <div class="button-container">
         <button class="view-button">👁 Visualizar</button>
-        <button class="submit-button">Enviar Vaga</button>
+        <button class="submit-button" id="submitVaga">Enviar Vaga</button>
       </div>
     </div>
   </div>
 
+  <script type="module" src="./firebaseConfig.js"></script>
+  <script type="module" src="./criarvagas.js"></script> 
 </body>
 </html>

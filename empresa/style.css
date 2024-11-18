@@ -165,24 +165,3 @@ body {
     color: #FFFFFF;
 }
 
-.navigation {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-}
-
-.nav-button {
-    background-color: #9720ffcc;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 10px;
-    border: none;
-    font-size: 18px;
-    margin: 0 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.nav-button:hover {
-    background-color: #9720ffcc;
-}
