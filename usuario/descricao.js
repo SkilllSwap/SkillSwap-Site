@@ -11,64 +11,74 @@ async function carregarVaga() {
   }
 
   try {
-    // Obtém os dados da vaga 
+    // Obtém os dados da vaga
     const vagaRef = doc(db, "Vagas", vagaId);
     const vagaDoc = await getDoc(vagaRef);
 
     if (vagaDoc.exists()) {
       const vaga = vagaDoc.data();
 
-      // depuração
+      // Depuração
       console.log("Dados da vaga:", vaga);
 
       // Preenche os campos na página com os dados da vaga
       const titleElem = document.getElementById("job-title");
       if (titleElem) {
         titleElem.textContent = vaga.Titulo;
-      } else {
-        console.error("Elemento 'job-title' não encontrado");
       }
 
       const descriptionElem = document.getElementById("job-description");
       if (descriptionElem) {
         descriptionElem.textContent = vaga.Descricao || "Descrição não disponível";
-      } else {
-        console.error("Elemento 'job-description' não encontrado");
       }
 
       const locationElem = document.getElementById("job-location");
       if (locationElem) {
         locationElem.textContent = vaga.Localizacao || "Localização não disponível";
-      } else {
-        console.error("Elemento 'job-location' não encontrado");
       }
 
       const salaryElem = document.getElementById("job-salary");
       if (salaryElem) {
         salaryElem.textContent = `R$ ${vaga.Salario || '0,00'}`;
-      } else {
-        console.error("Elemento 'job-salary' não encontrado");
       }
 
       const formElem = document.getElementById("job-form");
       if (formElem) {
         formElem.textContent = vaga.Forma_Trabalho || "Forma de trabalho não especificada";
-      } else {
-        console.error("Elemento 'job-form' não encontrado");
       }
 
+      // Exigências: Exibir cada exigência em uma nova linha com travessão
       const requirementsElem = document.getElementById("job-requirements");
       if (requirementsElem) {
-        requirementsElem.textContent = vaga.Exigencias ? vaga.Exigencias.join(', ') : "Exigências não disponíveis";
-      } else {
-        console.error("Elemento 'job-requirements' não encontrado");
+        if (vaga.Exigencias && Array.isArray(vaga.Exigencias) && vaga.Exigencias.length > 0) {
+          // Limpa o conteúdo anterior
+          requirementsElem.innerHTML = '';
+          // Adiciona cada exigência como um item de linha com travessão
+          vaga.Exigencias.forEach(exigencia => {
+            const p = document.createElement("p");  // Criando um elemento <p> para cada exigência
+            p.textContent = `— ${exigencia}`;  // Adicionando travessão
+            requirementsElem.appendChild(p);
+          });
+        } else {
+          requirementsElem.innerHTML = "<p>Exigências não disponíveis</p>";
+        }
       }
 
+      // Benefícios: Exibir cada benefício em uma nova linha com travessão
       const benefitsElem = document.getElementById("job-benefits");
       if (benefitsElem) {
-        benefitsElem.textContent = vaga.Beneficios ? vaga.Beneficios.join(', ') : "Benefícios não disponíveis";
-      } else {
-        console.error("Elemento 'job-benefits' não encontrado");
+        if (vaga.Beneficios && Array.isArray(vaga.Beneficios) && vaga.Beneficios.length > 0) {
+          // Limpa o conteúdo anterior
+          benefitsElem.innerHTML = '';
+          // Adiciona cada benefício como um item de linha com travessão
+          vaga.Beneficios.forEach(beneficio => {
+            const p = document.createElement("p");  // Criando um elemento <p> para cada benefício
+            p.textContent = `— ${beneficio}`;  // Adicionando travessão
+            benefitsElem.appendChild(p);
+          });
+        } else {
+          benefitsElem.innerHTML = "<p>Benefícios não disponíveis</p>";
+        }
       }
 
     } else {
