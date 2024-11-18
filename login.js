@@ -59,10 +59,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (userType === 'user') {
         showAlert('Login feito com sucesso! Redirecionando para a página de usuário...');
-        window.location.href = './usuario/FeedVaga.html';
+        window.location.href = './usuario/FeedVagas.html';
       } else if (userType === 'company') {
         showAlert('Login feito com sucesso! Redirecionando para a página de empresa...');
-        window.location.href = './pagina1.html';
+        window.location.href = './empresa/FeedCurriculo.html';
       } else {
         showAlert('Usuário não encontrado em nenhuma coleção.');
       }
