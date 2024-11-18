@@ -8,7 +8,6 @@
 </head>
 <body>
 
-  <!-- Navbar -->
   <div class="navbar">
     <div class="logo-container">
       <img src="../img/Logo-SkillSwap.png" alt="Logo" class="logo" />
@@ -27,7 +26,7 @@
     <h1 class="title">Currículo</h1>
 
     <form id="curriculumForm" class="form">
-      <!-- Dados Pessoais -->
+
       <div class="section">
         <h2>Dados Pessoais</h2>
         <input type="text" id="nome" placeholder="Nome" class="input" required>
@@ -37,11 +36,9 @@
         <input type="text" id="sexo" placeholder="Sexo" class="input" required>
       </div><br><br>
 
-      <!-- Formação Acadêmica -->
       <div class="section">
         <h2>Formação Acadêmica</h2>
         
-        <!-- Nível de Escolaridade -->
         <label for="nivelEscolaridade" class="label">Nível de Escolaridade:</label>
         <select id="nivelEscolaridade" class="input" required>
           <option value="">Selecione</option>
@@ -50,11 +47,9 @@
           <option value="Pós-Graduação">Pós-Graduação</option>
         </select>
 
-        <!-- Instituição e Curso -->
         <input type="text" id="instituicao" placeholder="Instituição" class="input" required>
         <input type="text" id="curso" placeholder="Curso" class="input" required>
 
-        <!-- Data de Início e Término -->
         <div class="date-range">
           <label for="inicio" class="label">Início:</label>
           <input type="date" id="inicio" class="input" required>
@@ -63,7 +58,6 @@
           <input type="date" id="termino" class="input" required>
         </div>
 
-        <!-- Horário Letivo -->
         <label class="label">Horário Letivo:</label>
         <div class="radio-group">
           <label><input type="radio" name="horario" value="Matutino"> Matutino</label>
@@ -73,7 +67,6 @@
         </div>
       </div><br><br>
 
-      <!-- Link do Portfólio -->
       <div class="section">
         <h2>Portfólio</h2>
         <label for="portfolio" class="label">Ex: GitHub</label>

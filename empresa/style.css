@@ -1,4 +1,4 @@
-
+/* Estilos gerais */
 body {
     background-color: #111;
     color: #E0E0E0;
@@ -9,9 +9,10 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-  }
-  
-  .navbar {
+}
+
+/* Barra de navegação */
+.navbar {
     background-color: #333333;
     position: fixed;
     top: 0;
@@ -22,51 +23,51 @@ body {
     align-items: center;
     padding-left: 30px;
     padding-right: 30px;
-  }
-  
-  .logo-container {
+}
+
+.logo-container {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-  }
-  
-  .logo {
+}
+
+.logo {
     width: 80px;
     height: auto;
     margin-right: 10px;
-  }
-  
-  .name {
+}
+
+.name {
     font-size: 24px;
     color: #f0f8ff;
     text-shadow: 0px 0px 10px rgba(151, 32, 255, 0.8), 0px 0px 20px rgba(151, 32, 255, 0.9), 0px 0px 30px rgba(151, 32, 255, 1);
     font-weight: 300;
-  }
-  
-  .nav-links {
+}
+
+.nav-links {
     list-style-type: none;
     display: flex;
     justify-content: center;
     flex-grow: 1;
-  }
-  
-  .nav-links li {
+}
+
+.nav-links li {
     margin: 0 20px;
-  }
-  
-  .nav-links a {
+}
+
+.nav-links a {
     color: #f0f8ff;
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;
     transition: color 0.3s;
-  }
-  
-  .nav-links a:hover {
+}
+
+.nav-links a:hover {
     color: #d8b4fe;
-  }
-  
-  .feed-container {
+}
+
+.feed-container {
     width: 80%;
     max-width: 1000px;
     background-color: #222222;
@@ -74,25 +75,67 @@ body {
     padding: 30px;
     box-shadow: 0 0 20px rgba(151, 32, 255, 0.8), 0 0 40px rgba(151, 32, 255, 0.9);
     margin-top: 120px;
-  }
-  
-  .title {
+}
+
+.title {
     font-size: 24px;
     color: #E0E0E0;
     font-weight: bold;
     margin-bottom: 20px;
     text-shadow: 0px 0px 10px rgba(151, 32, 255, 0.8), 0px 0px 20px rgba(151, 32, 255, 0.9), 0px 0px 30px rgba(151, 32, 255, 1);
-    text-align: center; 
-  }
-  
-  .scroll-container {
+    text-align: center;
+}
+
+.scroll-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
     align-items: center;
-  }
-  
-  .feed-item {
+}
+
+.input {
+    width: 80%;
+    max-width: 500px;
+    padding: 12px 20px;
+    background-color: #333333;
+    border: 2px solid #444;
+    border-radius: 10px;
+    color: #E0E0E0;
+    font-size: 16px;
+    margin: 10px 0;
+    transition: border 0.3s;
+}
+
+.input:focus {
+    border-color: #9720ff;
+    outline: none;
+}
+
+.large-input {
+    height: 120px;
+}
+
+.view-button, .submit-button {
+    background-color: #9720ff;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    font-size: 18px;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.view-button:hover, .submit-button:hover {
+    background-color: #d8b4fe;
+}
+
+.input:hover {
+    border-color: #9720ff;
+}
+
+.feed-item {
     width: 90%;
     background-color: #00000000;
     padding: 15px;
@@ -100,35 +143,35 @@ body {
     text-decoration: none;
     color: #FFFFFF;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .feed-item:hover {
+}
+
+.feed-item:hover {
     transform: scale(1.05);
     box-shadow: 0px 0px 10px #9720ffcc, 0px 0px 20px rgba(151, 32, 255, 0.9);
-  }
-  
-  .item-content {
+}
+
+.item-content {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid #fff; 
+    border: 2px solid #fff;
     padding: 10px;
-    border-radius: 10px; 
-  }
-  
-  .item-text {
+    border-radius: 10px;
+}
+
+.item-text {
     font-size: 16px;
     text-align: center;
     color: #FFFFFF;
-  }
+}
 
-  .navigation {
+.navigation {
     display: flex;
     justify-content: center;
     margin-top: 30px;
-  }
-  
-  .nav-button {
+}
+
+.nav-button {
     background-color: #9720ffcc;
     color: white;
     padding: 12px 20px;
@@ -138,9 +181,8 @@ body {
     margin: 0 10px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
-  
-  .nav-button:hover {
+}
+
+.nav-button:hover {
     background-color: #9720ffcc;
-  }
-  
+}

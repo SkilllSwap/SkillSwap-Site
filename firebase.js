@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             alert('Empresa cadastrada com sucesso!');
             document.getElementById('companyForm').reset();
-            window.location.href = "pagina2.html";  
+            window.location.href = "./empresa/FeedCurriculo.html";  
         } catch (error) {
             console.error('Erro ao cadastrar empresa:', error);
             alert(error.message);

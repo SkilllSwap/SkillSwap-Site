@@ -1,174 +1,4 @@
 body {
-    background-color: #222222;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #f0f8ff;
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center; 
-    align-items: center;  
-  }
-  
-  .navbar {
-    background-color: #333333;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 10px 0;
-    display: flex;
-    justify-content: center;  
-    align-items: center;  
-    padding-left: 30px; 
-    padding-right: 30px;
-  }
-  
-  .logo-container {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  
-  .logo {
-    width: 80px; 
-    height: auto;
-    margin-right: 10px;
-  }
-  
-  .name {
-    font-size: 24px;
-    color: #f0f8ff;
-    text-shadow: 
-      0px 0px 10px rgba(151, 32, 255, 0.8),
-      0px 0px 20px rgba(151, 32, 255, 0.9), 
-      0px 0px 30px rgba(151, 32, 255, 1);  
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 300;
-  }
-  
-  .nav-links {
-    list-style-type: none;
-    display: flex;
-    justify-content: center;
-    flex-grow: 1; 
-  }
-  
-  .nav-links li {
-    margin: 0 20px; 
-  }
-  
-  .nav-links a {
-    color: #f0f8ff;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    transition: color 0.3s;
-  }
-  
-  .nav-links a:hover {
-    color: #d8b4fe;
-  }
-  
-  .feed-container {
-    width: 80%;
-    max-width: 1000px; 
-    background-color: #333333;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 0 20px rgba(151, 32, 255, 0.8), 0 0 40px rgba(151, 32, 255, 0.9);
-    margin-top: 120px;
-    position: relative;
-  }
-  
-  .title {
-    font-size: 28px;
-    margin-bottom: 20px;
-    color: #d8b4fe;
-    text-shadow: 
-      0 0 10px rgba(151, 32, 255, 0.8),
-      0 0 20px rgba(151, 32, 255, 0.9),
-      0 0 30px rgba(151, 32, 255, 1);
-  }
-  
-  .card-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, auto);
-    gap: 15px;
-    margin-top: 20px;
-  }
-  
-  .card {
-    background-color: #9a6ccf;
-    border-radius: 8px;
-    padding: 15px;
-    color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    position: relative;
-    transition: transform 0.3s ease;
-    height: 200px;
-  }
-  
-  .card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(151, 32, 255, 0.8);
-  }
-  
-  .card img {
-    width: 40px;
-    height: auto;
-    margin-bottom: 10px;
-  }
-  
-  .card h3 {
-    font-size: 18px;
-    margin: 10px 0;
-    color: #f0f8ff;
-    text-shadow: 
-      0 0 10px rgba(151, 32, 255, 0.8),
-      0 0 20px rgba(151, 32, 255, 0.9),
-      0 0 30px rgba(151, 32, 255, 1);
-  }
-  
-  .card p {
-    font-size: 12px;
-    color: #f2f2f2;
-  }
-  
-  .navigation {
-    display: flex;
-    justify-content: space-between;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    transform: translateY(-50%);
-    width: 100%;
-  }
-  
-  .nav-button {
-    font-size: 60px;
-    color: #9a6ccf;
-    cursor: pointer;
-    transition: color 0.3s;
-  }
-  
-  .nav-button:hover {
-    color: #d8b4fe;
-  }
-  
-  .nav-button-prev {
-    position: absolute;
-    left: -100px;
-  }
-  
-  .nav-button-next {
-    position: absolute;
-    right: -100px;
-  }
-  /* Descrição */
-body {
   background-color: #222222;
   font-family: Arial, Helvetica, sans-serif;
   color: #f0f8ff;
@@ -176,16 +6,72 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  text-align: center;
-  justify-content: center; 
-  align-items: center;  
+  justify-content: flex-start;
+  align-items: center;
 }
 
+.navbar {
+  background-color: #333333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 30px;
+  padding-right: 30px;
+}
 
-/* Feed Container */
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.logo {
+  width: 80px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.name {
+  font-size: 24px;
+  color: #f0f8ff;
+  text-shadow: 
+    0px 0px 10px rgba(151, 32, 255, 0.8),
+    0px 0px 20px rgba(151, 32, 255, 0.9),
+    0px 0px 30px rgba(151, 32, 255, 1);  
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 300;
+}
+
+.nav-links {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.nav-links li {
+  margin: 0 20px;
+}
+
+.nav-links a {
+  color: #f0f8ff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #d8b4fe;
+}
+
 .feed-container {
   width: 80%;
-  max-width: 1000px; 
+  max-width: 1000px;
   background-color: #333333;
   border-radius: 10px;
   padding: 15px;
@@ -194,7 +80,6 @@ body {
   position: relative;
 }
 
-/* Job Title */
 .title {
   font-size: 28px;
   margin-bottom: 20px;
@@ -205,7 +90,83 @@ body {
     0 0 30px rgba(151, 32, 255, 1);
 }
 
-/* Top Buttons */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.card {
+  background-color: #9a6ccf;
+  border-radius: 8px;
+  padding: 15px;
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+  transition: transform 0.3s ease;
+  height: 200px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(151, 32, 255, 0.8);
+}
+
+.card img {
+  width: 40px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  font-size: 18px;
+  margin: 10px 0;
+  color: #f0f8ff;
+  text-shadow: 
+    0 0 10px rgba(151, 32, 255, 0.8),
+    0 0 20px rgba(151, 32, 255, 0.9),
+    0 0 30px rgba(151, 32, 255, 1);
+}
+
+.card p {
+  font-size: 12px;
+  color: #f2f2f2;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+.nav-button {
+  font-size: 60px;
+  color: #9a6ccf;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.nav-button:hover {
+  color: #d8b4fe;
+}
+
+.nav-button-prev {
+  position: absolute;
+  left: -100px;
+}
+
+.nav-button-next {
+  position: absolute;
+  right: -100px;
+}
+
 .top-section {
   display: flex;
   justify-content: center;
@@ -226,7 +187,6 @@ body {
   background-color: #9720ffcc;
 }
 
-/* Info Container */
 .info-container {
   margin-top: 20px;
 }
@@ -272,43 +232,6 @@ body {
   background-color: #5500cc;
 }
 
-/*-----------------------------------------------*/
-/* Body */
-body {
-  background-color: #222222;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #f0f8ff;
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-/* Feed Container */
-.feed-container {
-  width: 80%;
-  max-width: 1000px;
-  background-color: #333333;
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 0 0 20px rgba(151, 32, 255, 0.8), 0 0 40px rgba(151, 32, 255, 0.9);
-  margin-top: 120px;
-  position: relative;
-}
-
-.title {
-  font-size: 28px;
-  margin-bottom: 20px;
-  color: #d8b4fe;
-  text-shadow: 
-    0 0 10px rgba(151, 32, 255, 0.8),
-    0 0 20px rgba(151, 32, 255, 0.9),
-    0 0 30px rgba(151, 32, 255, 1);
-}
-
-/* Formulário */
 .form {
   display: flex;
   flex-direction: column;
@@ -334,10 +257,10 @@ select:focus {
   border-color: #9720ff;
   outline: none;
 }
-/* Ajuste específico para o select de Nível de Escolaridade */
+
 #nivelEscolaridade {
-  width: 100%; /* Mantém a largura total dentro do formulário */
-  max-width: 300px; /* Limita a largura do select */
+  width: 100%;
+  max-width: 300px;
   padding: 10px;
   margin: 10px 0;
   border-radius: 10px;
@@ -374,7 +297,6 @@ select:focus {
   margin-right: 8px;
 }
 
-/* Ajustes para os campos de data */
 .date-range {
   display: flex;
   justify-content: space-between;
@@ -383,10 +305,9 @@ select:focus {
 }
 
 .date-range .input {
-  width: 48%; /* Para garantir que ambos os campos de data fiquem na mesma linha */
+  width: 48%;
 }
 
-/* Botão */
 .button {
   background-color: #9720ffcc;
   padding: 15px;
@@ -410,27 +331,24 @@ input[type="text"] {
   background-color: #333333;
 }
 
-/* Ajuste para centralizar as opções do Horário Letivo */
 .radio-group {
   display: flex;
-  flex-direction: row;  /* Alinha as opções em linha */
-  justify-content: center;  /* Centraliza as opções horizontalmente */
-  align-items: center;  /* Centraliza as opções verticalmente */
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   margin: 10px 0;
 }
 
 .radio-group label {
-  margin: 0 15px;  /* Dá espaço entre as opções */
+  margin: 0 15px;
   color: #fff;
   font-size: 16px;
 }
 
 .radio-group input[type="radio"] {
-  margin-right: 8px;  /* Espaço entre o botão de opção e o texto */
+  margin-right: 8px;
 }
 
-
-/* Responsividade */
 @media (max-width: 768px) {
   .navbar {
     padding: 10px;
