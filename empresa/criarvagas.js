@@ -2,46 +2,45 @@ import { auth, db, setDoc, doc } from './firebaseConfig.js';
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // nviar os dados da vaga para o Firestore
+    // enviar os dados da vaga
     async function submitVaga() {
         const titulo = document.getElementById('vagaTitulo').value;
         const area = document.getElementById('vagaArea').value;  
-        const beneficios = document.getElementById('vagaBeneficios').value; 
+        const beneficios = document.getElementById('vagaBeneficios').value.split(',').map(item => item.trim()); 
         const dataPublicacao = new Date().toISOString(); 
         const descricao = document.getElementById('vagaDescricao').value; 
-        const exigencias = document.getElementById('vagaExigencias').value; 
+        const exigencias = document.getElementById('vagaExigencias').value.split(',').map(item => item.trim()); 
         const formaTrabalho = document.getElementById('vagaFormaTrabalho').value;
         const localizacao = document.getElementById('vagaLocalizacao').value; 
         const salario = document.getElementById('vagaSalario').value;  
 
-        // Verifica se todos os campos estão preenchidos
-        if (!titulo || !area || !beneficios || !descricao || !exigencias || !formaTrabalho || !localizacao || !salario) {
+        if (!titulo || !area || !beneficios.length || !descricao || !exigencias.length || !formaTrabalho || !localizacao || !salario) {
             alert('Por favor, preencha todos os campos.');
             return;
         }
 
         // Coletar os dados
         const vagaData = {
-            titulo: titulo,
-            area: area,
-            beneficios: beneficios,
-            data_publicacao: dataPublicacao, 
-            descricao: descricao,
-            exigencias: exigencias,
-            forma_trabalho: formaTrabalho,
-            localizacao: localizacao,
-            salario: salario,
-            createdAt: new Date()  // Adiciona a data de criação da vaga
+            Titulo: titulo, 
+            Area: area, 
+            Beneficios: beneficios,  
+            Data_Publicacao: dataPublicacao, 
+            Descricao: descricao, 
+            Exigencias: exigencias, 
+            Forma_Trabalho: formaTrabalho, 
+            Localizacao: localizacao, 
+            Salario: salario,  
+            createdAt: new Date()  
         };
 
         try {
-            //  um documento na coleção 
-            const vagaRef = doc(db, 'Vagas', titulo + "-" + new Date().getTime());  // Usando o título e timestamp como ID único
+            // Cria um novo documento na coleção com um ID único 
+            const vagaRef = doc(db, 'Vagas', titulo + "-" + new Date().getTime());
             await setDoc(vagaRef, vagaData);
 
             alert('Vaga criada com sucesso!');
 
-            // Limpar os campos
+            // Limpar os campos após o envio
             document.getElementById('vagaTitulo').value = '';
             document.getElementById('vagaArea').value = '';
             document.getElementById('vagaBeneficios').value = '';
@@ -51,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('vagaLocalizacao').value = '';
             document.getElementById('vagaSalario').value = '';
 
-            window.location.href = './FeedCurriculo.html';  
+            window.location.href = './CriarVagas.html';  
 
         } catch (error) {
             console.error('Erro ao criar vaga:', error);
@@ -59,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Evento de clique no botão "Enviar Vaga"
     document.getElementById('submitVaga').addEventListener('click', submitVaga);
 
 });
