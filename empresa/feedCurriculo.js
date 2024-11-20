@@ -43,7 +43,7 @@ async function loadVagas(EmpresaID) {
 
       // Cria os elementos do feed para cada vaga
       const feedItem = document.createElement("a");
-      feedItem.href = `Curriculos.html?vagaId=${vagaId}`; 
+      feedItem.href = `NomeCandidatos.html?vagaId=${vagaId}`; 
       feedItem.classList.add("feed-item");
 
       // Cria os elementos do feed

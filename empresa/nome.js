@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-//carrega os dados dos candidaturas para a vaga 
+// Carrega os dados das candidaturas para a vaga 
 async function loadCurriculos(vagaId) {
   try {
     // Verifica se o usuário está logado antes de continuar
@@ -54,7 +54,7 @@ async function loadCurriculos(vagaId) {
 
       console.log("ID do Candidato:", candidatoId);
 
-      // Verifica se o id do usuario realmente existe
+      // Verifica se o id do usuário realmente existe
       if (!candidatoId) {
         console.error("Id_Usuario não encontrado na candidatura.");
         return;
@@ -77,15 +77,20 @@ async function loadCurriculos(vagaId) {
       const usuarioData = usuarioDoc.data();
       const candidatoNome = usuarioData?.nome || "Nome não disponível";
 
-      console.log("Nome do Candidato:", candidatoNome); 
+      console.log("Nome do Candidato:", candidatoNome);
 
-      // Cria o item do feed para cada candidato
-      feedContainer.innerHTML += `
-        <div class="feed-item">
-          <div class="item-content">
-            <p class="item-text">${candidatoNome}</p> <!-- Exibe o nome do candidato -->
-          </div>
-        </div>`;
+      // Cria o item do feed como link
+      const feedItem = document.createElement("a");
+      feedItem.href = `Curriculo.html?usuarioId=${candidatoId}`;
+      feedItem.classList.add("feed-item");
+      feedItem.innerHTML = `
+        <div class="item-content">
+          <p class="item-text">${candidatoNome}</p>
+        </div>
+      `;
+
+      // Adiciona o item ao feed
+      feedContainer.appendChild(feedItem);
     });
   } catch (error) {
     console.error("Erro ao carregar os currículos:", error);
