@@ -84,6 +84,7 @@ body {
   font-size: 28px;
   margin-bottom: 20px;
   color: #d8b4fe;
+  text-align: center;
   text-shadow: 
     0 0 10px rgba(151, 32, 255, 0.8),
     0 0 20px rgba(151, 32, 255, 0.9),
@@ -250,6 +251,7 @@ select {
   background-color: #333333;
   color: #fff;
   font-size: 16px;
+  align-items: center;
 }
 
 .input:focus,
@@ -272,6 +274,20 @@ select:focus {
 
 #nivelEscolaridade:focus {
   border-color: #9720ff;
+  outline: none;
+}
+
+textarea.input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+textarea.input:focus {
+  border-color: #007bff;
   outline: none;
 }
 
@@ -348,6 +364,34 @@ input[type="text"] {
 .radio-group input[type="radio"] {
   margin-right: 8px;
 }
+
+/*animação de check */
+#check-container {
+  display: none; 
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 128, 0, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  font-size: 24px;
+  text-align: center;
+  z-index: 1000;
+}
+
+#check-container i {
+  font-size: 50px;
+  animation: checkAnimation 1s ease-in-out;
+}
+
+@keyframes checkAnimation {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
 
 @media (max-width: 768px) {
   .navbar {

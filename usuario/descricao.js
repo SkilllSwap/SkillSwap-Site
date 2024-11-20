@@ -47,7 +47,7 @@ async function carregarVaga() {
         formElem.textContent = vaga.Forma_Trabalho || "Forma de trabalho não especificada";
       }
 
-      // Exigências: Exibir cada exigência em uma nova linha com travessão
+      // Exibi cada exigência em uma nova linha
       const requirementsElem = document.getElementById("job-requirements");
       if (requirementsElem) {
         if (vaga.Exigencias && Array.isArray(vaga.Exigencias) && vaga.Exigencias.length > 0) {
@@ -55,8 +55,8 @@ async function carregarVaga() {
           requirementsElem.innerHTML = '';
           // Adiciona cada exigência como um item de linha com travessão
           vaga.Exigencias.forEach(exigencia => {
-            const p = document.createElement("p");  // Criando um elemento <p> para cada exigência
-            p.textContent = `— ${exigencia}`;  // Adicionando travessão
+            const p = document.createElement("p");  // Cria um <p> para cada exigência
+            p.textContent = `— ${exigencia}`;  // Adiciona travessão
             requirementsElem.appendChild(p);
           });
         } else {
@@ -64,7 +64,7 @@ async function carregarVaga() {
         }
       }
 
-      // Benefícios: Exibir cada benefício em uma nova linha com travessão
+      // Exibir cada benefício em uma nova linha com travessão
       const benefitsElem = document.getElementById("job-benefits");
       if (benefitsElem) {
         if (vaga.Beneficios && Array.isArray(vaga.Beneficios) && vaga.Beneficios.length > 0) {
@@ -72,13 +72,19 @@ async function carregarVaga() {
           benefitsElem.innerHTML = '';
           // Adiciona cada benefício como um item de linha com travessão
           vaga.Beneficios.forEach(beneficio => {
-            const p = document.createElement("p");  // Criando um elemento <p> para cada benefício
-            p.textContent = `— ${beneficio}`;  // Adicionando travessão
+            const p = document.createElement("p");  // Cria um elemento <p> para cada benefício
+            p.textContent = `— ${beneficio}`;  //adiciona travessão
             benefitsElem.appendChild(p);
           });
         } else {
           benefitsElem.innerHTML = "<p>Benefícios não disponíveis</p>";
         }
+      }
+
+      // Atualizan o link de candidatura com o ID da vaga
+      const candidatarElem = document.getElementById("candidatar-link");
+      if (candidatarElem) {
+        candidatarElem.setAttribute("href", `Curriculo.html?id=${vagaId}`);
       }
 
     } else {
