@@ -13,9 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    //  enviar os dados do formulário para o Firebase
+    // enviar os dados do formulário para o Firebase
     form.addEventListener("submit", async (e) => {
-      e.preventDefault(); 
+      e.preventDefault(); // Previne o envio padrão do formulário
 
       // Coleta os dados do formulário
       const nome = document.getElementById("nome").value.trim();
@@ -29,10 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const inicio = document.getElementById("inicio").value.trim();
       const termino = document.getElementById("termino").value.trim();
       const horarioLetivo = document.querySelector('input[name="horario"]:checked')?.value;
-      const portfolio = document.getElementyById("portifolio").value.trim();
-      const experiencia = document.getElementByIBd("experiencia").value.trim(); 
+      const portfolio = document.getElementById("portfolio").value.trim();  // Corrigido: "portfolio" e "getElementById"
+      const experiencia = document.getElementById("experiencia").value.trim();  // Corrigido: "experiencia" e "getElementById"
 
-      // Valida se os camposforam preenchidos
+      // Valida se os campos obrigatórios foram preenchidos
       if (!nome || !endereco || !dataNascimento || !estadoCivil || !sexo || !nivelEscolaridade || !instituicao || !curso || !inicio || !termino) {
         alert("Por favor, preencha todos os campos obrigatórios.");
         return;
@@ -47,43 +47,44 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
-        // 1. Envia os dados do currículo para a coleção 
+        // 1. Envia os dados do currículo para a coleção "Curriculo"
         const curriculumData = {
           Data_Atualizacao: new Date().toISOString(),
-          Experiencia: experiencia, 
+          Experiencia: experiencia, // Adicionando o campo de experiência
           Formacao: [nivelEscolaridade, instituicao, curso, inicio, termino],
-          Id_Usuario: doc(db, "Usuário", user.uid),
+          Id_Usuario: doc(db, "Usuário", user.uid),  // Referência ao usuário
           DataNascimento: dataNascimento,
           Endereco: endereco,
           EstadoCivil: estadoCivil,
           HorarioLetivo: horarioLetivo,
           Nome: nome,
-          PdfLink: portfolio,
+          PdfLink: portfolio,  // Link do portfólio ou PDF
           Sexo: sexo
         };
 
-        // Adiciona na coleção 
+        // Adiciona na coleção "Curriculo"
         await setDoc(doc(db, "Curriculo", user.uid), curriculumData);
         console.log("Currículo enviado com sucesso.");
 
-        // 2. Adiciona a candidatura na coleção 
+        // 2. Adiciona a candidatura na coleção "Candidatura"
         const candidaturaData = {
           Id_Usuario: user.uid,
           Id_Vaga: vagaId,
-          DataCandidatura: new Date().toISOString()  
+          DataCandidatura: new Date().toISOString()  // Data da candidatura
         };
 
+        // Adiciona na coleção "Candidatura"
         await addDoc(collection(db, "Candidatura"), candidaturaData);
         console.log("Candidatura enviada com sucesso.");
 
         // Exibe animação de check
         const checkContainer = document.getElementById("check-container");
-        checkContainer.style.display = "block";
+        checkContainer.style.display = "block"; // Exibe a animação
 
-        // Redireciona após 2 segundos para a página de FeedVagas
+        // Redireciona após 2 segundos para a página de FeedVagas.html
         setTimeout(() => {
-          window.location.href = './FeedVagas.html'; 
-        }, 2000); 
+          window.location.href = './FeedVagas.html'; // Redireciona para o feed de vagas
+        }, 2000); // Aguarda 2 segundos para o efeito da animação
 
         form.reset(); // Limpa o formulário após o envio
       } catch (error) {
