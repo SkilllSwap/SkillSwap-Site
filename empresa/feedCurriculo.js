@@ -24,13 +24,13 @@ async function loadVagas(EmpresaID) {
 
     const vagasRef = collection(db, "Vagas");
 
-    // Criar uma query para buscar apenas as vagas da empresa logada
+    // Cria uma query para buscar apenas as vagas da empresa logada
     const q = query(vagasRef, where("EmpresaID", "==", EmpresaID));
 
-    // Buscar as vagas da empresa
+    // Busca as vagas da empresa
     const querySnapshot = await getDocs(q);
 
-    // Verificar se existem vagas
+    // Verifica se existem vagas
     if (querySnapshot.empty) {
       document.getElementById("feedContainer").innerHTML = "<p>Você ainda não criou nenhuma vaga.</p>";
       return;
@@ -43,7 +43,7 @@ async function loadVagas(EmpresaID) {
 
       // Cria os elementos do feed para cada vaga
       const feedItem = document.createElement("a");
-      feedItem.href = `#`; 
+      feedItem.href = `Curriculos.html?vagaId=${vagaId}`; 
       feedItem.classList.add("feed-item");
 
       // Cria os elementos do feed
