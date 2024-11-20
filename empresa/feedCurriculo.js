@@ -1,26 +1,42 @@
-import { db, collection, getDocs } from './firebaseConfig.js';
+import { db, collection, getDocs, query, where } from './firebaseConfig.js';
+import { auth } from './firebaseConfig.js';  // Importar a autenticação
 
-// carrega as vagas da empresa no feed
+// Função para carregar as vagas da empresa logada
 document.addEventListener("DOMContentLoaded", () => {
-  loadVagas();
+
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      loadVagas(user.uid);  // Passa o ID do usuário logado
+    } else {
+      alert('Você precisa estar logado para ver suas vagas.');
+    }
+  });
 });
 
-// Função para carregar as vagas
-async function loadVagas() {
+// carrega as vagas da empresa 
+async function loadVagas(EmpresaID) {
   try {
-    // Referência para a coleção de Vagas
-    const vagasRef = collection(db, "Vagas");
-
-    // Buscar todas as vagas da coleção
-    const querySnapshot = await getDocs(vagasRef);
-
-    // Verificar se existem vagas
-    if (querySnapshot.empty) {
-      document.getElementById("feedContainer").innerHTML = "<p>Nenhuma vaga disponível no momento.</p>";
+    // Verifica se o usuário está logado
+    if (!EmpresaID) {
+      alert('Você precisa estar logado para ver suas vagas.');
       return;
     }
 
-    //adiciona as vagas ao feed
+    const vagasRef = collection(db, "Vagas");
+
+    // Criar uma query para buscar apenas as vagas da empresa logada
+    const q = query(vagasRef, where("EmpresaID", "==", EmpresaID));
+
+    // Buscar as vagas da empresa
+    const querySnapshot = await getDocs(q);
+
+    // Verificar se existem vagas
+    if (querySnapshot.empty) {
+      document.getElementById("feedContainer").innerHTML = "<p>Você ainda não criou nenhuma vaga.</p>";
+      return;
+    }
+
+    // Adiciona as vagas ao feed
     querySnapshot.forEach((vagaDoc) => {
       const vagaData = vagaDoc.data();
       const vagaId = vagaDoc.id;
@@ -30,14 +46,14 @@ async function loadVagas() {
       feedItem.href = `#`; 
       feedItem.classList.add("feed-item");
 
-      // Criar os elementos
+      // Cria os elementos do feed
       feedItem.innerHTML = `
         <div class="item-content">
-          <p class="item-text">${vagaData.titulo}</p>
+          <p class="item-text">${vagaData.Titulo}</p> <!-- Exibe o título da vaga -->
         </div>
       `;
 
-      // Adicionar o item ao feed
+      // Adiciona o item ao feed
       document.getElementById("feedContainer").appendChild(feedItem);
     });
   } catch (error) {

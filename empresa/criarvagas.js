@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Coletar o ID do usuário autenticado 
-        const empresa_ID = auth.currentUser?.uid;  // Pode ser null se não estiver logado
-        if (!empresa_ID) {
+        const EmpresaID = auth.currentUser?.uid;  // Pode ser null se não estiver logado
+        if (!EmpresaID) {
             alert('Você precisa estar logado para criar uma vaga.');
             return;
         }
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             Forma_Trabalho: formaTrabalho, 
             Localizacao: localizacao, 
             Salario: salario,  
-            EmpresaID: empresa_ID,  
+            EmpresaID: EmpresaID,  
             createdAt: new Date() 
         };
 
