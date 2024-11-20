@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // enviar os dados da vaga
     async function submitVaga() {
+        // Recuperar dados dos campos do formulário
         const titulo = document.getElementById('vagaTitulo').value;
         const area = document.getElementById('vagaArea').value;  
         const beneficios = document.getElementById('vagaBeneficios').value.split(',').map(item => item.trim()); 
@@ -19,7 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Coletar os dados
+        // Coletar o ID do usuário autenticado 
+        const empresa_ID = auth.currentUser?.uid;  // Pode ser null se não estiver logado
+        if (!empresa_ID) {
+            alert('Você precisa estar logado para criar uma vaga.');
+            return;
+        }
+
+        // Coletar os dados da vaga
         const vagaData = {
             Titulo: titulo, 
             Area: area, 
@@ -30,11 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
             Forma_Trabalho: formaTrabalho, 
             Localizacao: localizacao, 
             Salario: salario,  
-            createdAt: new Date()  
+            EmpresaID: empresa_ID,  
+            createdAt: new Date() 
         };
 
         try {
-            // Cria um novo documento na coleção com um ID único 
+            // Cria um novo documento na coleção Vagas com um ID único baseado no título e timestamp
             const vagaRef = doc(db, 'Vagas', titulo + "-" + new Date().getTime());
             await setDoc(vagaRef, vagaData);
 
@@ -58,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    //evento de clique no botão
     document.getElementById('submitVaga').addEventListener('click', submitVaga);
 
 });
