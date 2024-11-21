@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Perfil - Skill Swap</title>
+  <link rel="stylesheet" href="../usuario/styles.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="logo-container">
+      <img src="../img/Logo-SkillSwap.png" alt="Logo" class="logo" />
+      <h2 class="name">Skill Swap</h2>
+    </div>
+    <ul class="nav-links">
+      <li><a href="./FeedVagas.html">Feed de Vagas</a></li>
+      <li><a href="./Pesquisa.html">Pesquisa</a></li>
+      <li><a href="#sobre">Notificações</a></li>
+      <li><a href="./perfil.html">Perfil</a></li>
+    </ul>
+  </div>
+
+  <div class="profile-container">
+    <div class="profile-header">
+      <div class="profile-picture">
+        <img src="../img/perfil.png" alt="Foto de Perfil" id="profileImage">
+        <input type="file" id="editProfilePicture" accept="image/*" />
+      </div>
+      <div class="profile-name">
+        <h1 id="userName">Nome do Usuário</h1>
+      </div>
+    </div>
+
+    <div class="profile-info">
+      <form id="editProfileForm">
+        <div class="info-row">
+          <label for="editName"><strong>Nome:</strong></label>
+          <input type="text" id="editName" value="Nome do Usuário">
+        </div>
+
+        <div class="info-row">
+          <label for="editEmail"><strong>Contato:</strong></label>
+          <input type="email" id="editEmail" value="Contato não definido">
+        </div>
+
+        <div class="info-row">
+          <label for="editAreaAtuacao"><strong>Área de Atuação:</strong></label>
+          <input type="text" id="editAreaAtuacao" value="Área de atuação não definida">
+        </div>
+
+        <div class="info-row">
+          <label for="editLocalizacao"><strong>Localização:</strong></label>
+          <input type="text" id="editLocalizacao" value="Localização não informada">
+        </div>
+
+        <div class="curriculo-btn-container">
+          <button type="submit" class="curriculo-btn">Salvar Alterações</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="firebaseConfig.js"></script>
+  <script type="module" src="editarPerfil.js"></script>
+</body>
+</html>
