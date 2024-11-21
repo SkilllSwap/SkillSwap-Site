@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             alert('Usuário cadastrado com sucesso!');
             document.getElementById('userForm').reset();
-            window.location.href = "./usuario/FeedVagas.html";  // Redirecionamento após sucesso
+            window.location.href = "./usuario/FeedVagas.html";  
         } catch (error) {
             console.error('Erro ao cadastrar usuário:', error);
             alert(error.message);
