@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
-import { getFirestore, collection, getDocs, doc, setDoc, getDoc, addDoc} from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js"; // Importando funções do Firestore
+import { getFirestore, collection, getDocs, doc, setDoc, getDoc, addDoc, } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js"; // Importando funções do Firestore
 
 const firebaseConfig = {
   apiKey: "AIzaSyDJBNL9rh1cJnY0qKpqsuuyp2asjmG6abs",

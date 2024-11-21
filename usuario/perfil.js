@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   onAuthStateChanged(auth, async (user) => {
     if (!user) {
       alert("Você precisa estar logado para acessar o perfil.");
-      window.location.href = "./login.html";  // Redirecionar para a página de login, se não estiver logado.
+      window.location.href = "./login.html";  // Redireciona para a página de login, se não estiver logado.
       return;
     }
 
@@ -22,19 +22,24 @@ document.addEventListener("DOMContentLoaded", () => {
       await showCurriculum(user.uid);
     });
 
+    // A navegação para a edição do perfil deve ocorrer aqui dentro
+    document.getElementById("editProfileBtn").addEventListener("click", () => {
+      window.location.href = `./EditarPerfil.html?userId=${user.uid}`; 
+    });
+
   });
 });
 
-//carregar os dados do perfil
+//carrega os dados do perfil
 async function loadProfileData(userId) {
   try {
-    // Recuperar os dados do usuário da coleção
+    // Recupera os dados do usuário da coleção
     const userDoc = await getDoc(doc(db, "Usuário", userId));
 
     if (userDoc.exists()) {
       const userData = userDoc.data();
 
-      // Atualizar as informações no perfil
+      // Atualiza as informações no perfil
       document.getElementById("profileImage").src = userData.foto || "../img/perfil.png";  //foto padrão
       document.getElementById("userName").textContent = userData.nome || "Nome do Usuário";
       document.getElementById("userEmail").textContent = userData.email || "Email não informado";
@@ -61,7 +66,7 @@ async function showCurriculum(userId) {
 
       // currículo
       document.getElementById('curriculoContent').style.display = 'block';  
-      document.getElementById('curriculoInfo').innerHTML = `
+      document.getElementById('curriculoInfo').innerHTML = ` 
         <p><strong>Nome:</strong> ${curriculum.Nome}</p>
         <p><strong>Data de Nascimento:</strong> ${dataNascimento}</p>
         <p><strong>Sexo:</strong> ${curriculum.Sexo || "Não informado"}</p>
@@ -72,7 +77,7 @@ async function showCurriculum(userId) {
         <p><strong>Experiência Profissional:</strong> ${curriculum.Experiencia || "Não informada"}</p>
         <p><strong>Horário Letivo:</strong> ${curriculum.HorarioLetivo || "Não informado"}</p>
         <p><strong>Última Atualização:</strong> ${dataAtualizacao}</p>
-        <p><strong>Portfolio:</strong> <a href="${curriculum.PdfLink}" target="_blank"></a></p>
+        <p><strong>Portfolio:</strong> <a href="${curriculum.PdfLink}" target="_blank">Link para o Portfolio</a></p>
       `;
     } else {
       alert("Currículo não encontrado.");
@@ -82,4 +87,3 @@ async function showCurriculum(userId) {
     alert("Erro ao carregar o currículo. Tente novamente.");
   }
 }
-
