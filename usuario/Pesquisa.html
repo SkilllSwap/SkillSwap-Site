@@ -8,7 +8,6 @@
 </head>
 <body>
   <div class="navbar">
-
     <div class="logo-container">
       <img src="../img/Logo-SkillSwap.png" alt="Logo" class="logo" />
       <h2 class="name">Skill Swap</h2>
@@ -27,20 +26,19 @@
 
     <div class="form">
       <div class="input-group">
-        <label for="searchInput">Nome da Vaga</label>
-        <input type="text" id="searchInput" class="input" placeholder="Digite o nome da vaga" oninput="pesquisarVagas()">
+        <label for="searchInput">Título ou Localização</label>
+        <input type="text" id="searchInput" class="input" placeholder="Digite o título ou localização" oninput="pesquisarVagas()">
       </div>
     </div>
 
     <div class="feed-container">
       <div class="title">Resultados da Pesquisa</div>
 
-      <div class="card-container" id="card-container">
-        
-      </div>
+      <div class="card-container" id="card-container"></div>
     </div>
   </div>
 
-  <script src="pesquisa.js"></script>
+  <script type="module" src="firebaseConfig.js"></script>
+  <script type="module" src="pesquisa.js"></script>
 </body>
 </html>

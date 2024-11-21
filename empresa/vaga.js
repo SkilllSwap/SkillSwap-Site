@@ -1,27 +1,24 @@
-import { db, doc, getDoc } from './firebaseConfig.js';
+import { db, doc, getDoc, deleteDoc } from './firebaseConfig.js';
 
 async function carregarVaga() {
-  // Captura o parâmetro `id` da URL
   const urlParams = new URLSearchParams(window.location.search);
-  const vagaId = urlParams.get('id'); // Obtém o ID da vaga da URL
-  
+  const vagaId = urlParams.get('vagaId'); 
+
+  console.log("ID da Vaga:", vagaId); 
+
   if (!vagaId) {
-    alert("Vaga não encontrada.");
+    alert("ID da vaga não especificado na URL.");
     return;
   }
 
   try {
-    // Obtém os dados da vaga
+    // Verifica o documento da vaga no Firestore
     const vagaRef = doc(db, "Vagas", vagaId);
     const vagaDoc = await getDoc(vagaRef);
 
     if (vagaDoc.exists()) {
       const vaga = vagaDoc.data();
-
-      // Depuração
-      console.log("ID da Vaga:", vagaId);
-      console.log("Documento encontrado:", vagaDoc.exists());
-      console.log("Dados da vaga:", vaga);
+      console.log("Vaga encontrada:", vaga); // Exibe os dados da vaga no console
 
       // Preenche os campos na página com os dados da vaga
       const titleElem = document.getElementById("job-title");
@@ -49,16 +46,15 @@ async function carregarVaga() {
         formElem.textContent = vaga.Forma_Trabalho || "Forma de trabalho não especificada";
       }
 
-      // Exibi cada exigência em uma nova linha
       const requirementsElem = document.getElementById("job-requirements");
       if (requirementsElem) {
         if (vaga.Exigencias && Array.isArray(vaga.Exigencias) && vaga.Exigencias.length > 0) {
           // Limpa o conteúdo anterior
           requirementsElem.innerHTML = '';
-          // Adiciona cada exigência como um item de linha com travessão
+
           vaga.Exigencias.forEach(exigencia => {
-            const p = document.createElement("p");  // Cria um <p> para cada exigência
-            p.textContent = `— ${exigencia}`;  // Adiciona travessão
+            const p = document.createElement("p");
+            p.textContent = `— ${exigencia}`;
             requirementsElem.appendChild(p);
           });
         } else {
@@ -66,16 +62,13 @@ async function carregarVaga() {
         }
       }
 
-      // Exibir cada benefício em uma nova linha com travessão
       const benefitsElem = document.getElementById("job-benefits");
       if (benefitsElem) {
         if (vaga.Beneficios && Array.isArray(vaga.Beneficios) && vaga.Beneficios.length > 0) {
-          // Limpa o conteúdo anterior
           benefitsElem.innerHTML = '';
-          // Adiciona cada benefício como um item de linha com travessão
           vaga.Beneficios.forEach(beneficio => {
-            const p = document.createElement("p");  // Cria um elemento <p> para cada benefício
-            p.textContent = `— ${beneficio}`;  //adiciona travessão
+            const p = document.createElement("p");
+            p.textContent = `— ${beneficio}`;
             benefitsElem.appendChild(p);
           });
         } else {
@@ -83,12 +76,27 @@ async function carregarVaga() {
         }
       }
 
-      // Atualiza o link de candidatura com o ID da vaga
-      const candidatarElem = document.getElementById("candidatar-link");
-      if (candidatarElem) {
-        candidatarElem.setAttribute("href", `Curriculo.html?id=${vagaId}`);
+      // Atualiza o link de edição com o ID da vaga
+      const editElem = document.getElementById("edit-link");
+      if (editElem) {
+        editElem.setAttribute("href", `EditarVaga.html?vagaId=${vagaId}`);
       }
 
+      // Função para excluir a vaga
+      const deleteButton = document.getElementById("delete-button");
+      if (deleteButton) {
+        deleteButton.addEventListener("click", async () => {
+          try {
+            // Excluir a vaga 
+            await deleteDoc(vagaRef);
+            alert("Vaga excluída com sucesso!");
+            window.location.href = "./MinhasVagas.html"; 
+          } catch (error) {
+            console.error("Erro ao excluir vaga:", error);
+            alert("Erro ao excluir a vaga.");
+          }
+        });
+      }
     } else {
       console.log("Vaga não encontrada no Firestore.");
       alert("Vaga não encontrada.");
@@ -98,5 +106,6 @@ async function carregarVaga() {
     alert("Erro ao carregar a vaga.");
   }
 }
+
 
 document.addEventListener("DOMContentLoaded", carregarVaga);

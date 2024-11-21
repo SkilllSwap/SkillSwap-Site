@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Vaga</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo-container">
+      <img src="../img/Logo-SkillSwap.png" alt="Logo" class="logo" />
+      <h2 class="name">Skill Swap</h2>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="./FeedCurriculo.html">Feed de Vagas</a></li>
+      <li><a href="#feed">Pesquisa</a></li>
+      <li><a href="#sobre">Notificações</a></li>
+      <li><a href="#contato">Perfil</a></li>
+    </ul>
+  </div>
+
+  <div class="feed-container">
+    <h1 class="title">Editar Vaga</h1>
+    
+    <div class="scroll-container">
+      <form id="vaga-form">
+
+        <input type="text" id="job-title" name="job-title" class="input" placeholder="Título da Vaga" required><br>
+        <textarea id="job-description" name="job-description" class="input large-input" placeholder="Descrição da Vaga" required></textarea><br>
+        <input type="text" id="job-location" name="job-location" class="input" placeholder="Localização" required><br>
+        <input type="text" id="job-salary" name="job-salary" class="input" placeholder="Salário" required><br>
+        <input type="text" id="job-form" name="job-form" class="input" placeholder="Forma de Trabalho" required><br>
+        <textarea id="job-benefits" name="job-benefits" class="input large-input" placeholder="Benefícios" required></textarea><br>
+        <textarea id="job-requirements" name="job-requirements" class="input large-input" placeholder="Exigências" required></textarea><br>
+
+        <div class="button-container">
+          <button type="submit" class="submit-button">Atualizar Vaga</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="firebaseConfig.js"></script>
+  <script type="module" src="editarVaga.js"></script>
+
+</body>
+</html>
