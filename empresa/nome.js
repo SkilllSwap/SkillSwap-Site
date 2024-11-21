@@ -81,7 +81,7 @@ async function loadCurriculos(vagaId) {
 
       // Cria o item do feed como link
       const feedItem = document.createElement("a");
-      feedItem.href = `Curriculo.html?usuarioId=${candidatoId}`;
+      feedItem.href = `Curriculo.html?usuarioId=${candidatoId}&vagaId=${vagaId}`;
       feedItem.classList.add("feed-item");
       feedItem.innerHTML = `
         <div class="item-content">

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currículo do Candidato</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo-container">
+      <img src="../img/Logo-SkillSwap.png" alt="Logo" class="logo" />
+      <h2 class="name">Skill Swap</h2>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="./FeedCurriculo.html">Feed de Vagas</a></li>
+      <li><a href="#feed">Pesquisa</a></li>
+      <li><a href="#sobre">Notificações</a></li>
+      <li><a href="#contato">Perfil</a></li>
+    </ul>
+  </div>
+
+  <div class="feed-container">
+    <h1 class="title" id="nome">Currículo do Candidato</h1>
+    <br>
+
+    <div class="exibir" id="curriculoContainer">
+      <p><strong>Endereço:</strong> <span id="endereco"></span></p>
+      <p><strong>Data de Nascimento:</strong> <span id="dataNascimento"></span></p>
+      <p><strong>Estado Civil:</strong> <span id="estadoCivil"></span></p>
+      <p><strong>Sexo:</strong> <span id="sexo"></span></p>
+      <p><strong>Experiência:</strong> <span id="experiencia"></span></p>
+      <br>
+
+      <h2 class="subtitle">Formação Acadêmica</h2>
+      <p><strong>Nível de Escolaridade:</strong> <span id="nivelEscolaridade"></span></p>
+      <p><strong>Instituição:</strong> <span id="instituicao"></span></p>
+      <p><strong>Curso:</strong> <span id="curso"></span></p>
+      <p><strong>Início:</strong> <span id="inicio"></span></p>
+      <p><strong>Término:</strong> <span id="termino"></span></p>
+      <p><strong>Horário Letivo:</strong> <span id="horarioLetivo"></span></p>
+      <br>
+
+      <h2 class="subtitle">Portfólio</h2>
+      <p><strong>Link do PDF:</strong> <a id="portfolio" href="#" target="_blank">Ver Portfólio</a></p>
+      <br>
+      <br>
+
+      <div class="actions">
+        <button class="button" id="aceitarBtn">Aceitar Currículo</button>
+        <button class="button" id="guardarBtn">Guardar Currículo</button>
+        <button class="button" id="excluirBtn">Excluir Currículo</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="firebaseConfig.js"></script>
+  <script type="module" src="curriculo.js"></script>
+</body>
+</html>
