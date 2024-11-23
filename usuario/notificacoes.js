@@ -29,7 +29,7 @@ async function monitorarCandidaturas(userId) {
       const empresaId = candidaturaData.empresaId;
 
       // Quando a candidatura for aceita, gerar a notificação
-      if (status === "aceito") {
+      if (status === "Aceito") {
         adicionarNotificacao(userId, `Sua candidatura foi aceita pela empresa ${empresaId}!`);
       }
     }
