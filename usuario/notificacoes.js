@@ -108,13 +108,13 @@ async function carregarNotificacoes(userId) {
   });
 }
 
-// Exibe as notificações na interface
+// Carregar notificações e exibir na interface
 function exibirNotificacoes(notificacoes) {
   const notificationsList = document.getElementById("notificationsList");
 
   if (!notificationsList) {
     console.error("Elemento 'notificationsList' não encontrado.");
-    return; 
+    return;
   }
 
   notificationsList.innerHTML = ""; // Limpa as notificações
@@ -125,38 +125,50 @@ function exibirNotificacoes(notificacoes) {
   }
 
   notificacoes.forEach((notification, index) => {
-    const notificationItem = document.createElement("li");
-    notificationItem.classList.add(notification.lida ? "read" : "unread");
-    notificationItem.innerHTML = `
+    const notificationCard = document.createElement("li");
+    notificationCard.classList.add("notification-card", notification.lida ? "read" : "unread");
+
+    // Criar o conteúdo do card
+    notificationCard.innerHTML = `
       <p>${notification.mensagem}</p>
       <small>${new Date(notification.data.seconds * 1000).toLocaleString("pt-BR")}</small>
-      <button onclick="marcarNotificacaoComoLida('${notification.mensagem}', ${index})">Marcar como lida</button>
+      <button class="mark-as-read">Marcar como lida</button>
     `;
-    notificationsList.appendChild(notificationItem);
+
+    // Adicionar o evento de clique ao botão
+    const button = notificationCard.querySelector(".mark-as-read");
+    button.addEventListener("click", () => marcarNotificacaoComoLida(notification.mensagem, index));
+
+    notificationsList.appendChild(notificationCard);
   });
 }
 
-// Marca uma notificação como lida
-async function marcarNotificacaoComoLida(usuarioId, notificationIndex) {
+// Marcar a notificação como lida
+async function marcarNotificacaoComoLida(mensagem, notificationIndex) {
   try {
+    const usuarioId = "seu_usuario_id_aqui";  // Certifique-se de passar o ID correto do usuário
     const notificacoesRef = doc(db, "Notificacoes", usuarioId);
     const notificacoesDoc = await getDoc(notificacoesRef);
 
     if (notificacoesDoc.exists()) {
       const notifications = notificacoesDoc.data().notificacoes;
       const notification = notifications[notificationIndex];
-      
-      // Marca como lida
+
+      // Marca a notificação como lida
       notification.lida = true;
 
-      // Atualiza a notificação
+      // Atualiza as notificações
       await setDoc(notificacoesRef, {
         notificacoes: notifications
-      }, { merge: true }); 
+      }, { merge: true });
 
       console.log("Notificação marcada como lida.");
+      
+      // Atualiza as notificações na interface
+      carregarNotificacoes(usuarioId);
     }
   } catch (error) {
     console.error("Erro ao marcar notificação como lida:", error);
   }
 }
+

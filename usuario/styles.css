@@ -524,6 +524,59 @@ input[type="text"] {
   100% { transform: scale(1); opacity: 1; }
 }
 
+.notifications-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.notification-card {
+  border: 2px solid #ffffff; /* Borda maior */
+  border-radius: 12px; /* Borda mais arredondada */
+  padding: 14px; /* Diminuímos o padding para um layout mais compacto */
+  margin: 10px 0;
+  background-color: #ffdddd; /* Cor de fundo mais suave */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.notification-card p {
+  font-size: 14px; /* Fonte menor */
+  margin: 0;
+  color: #333; /* Cor de texto escura para melhor contraste */
+}
+
+.notification-card small {
+  color: #666; /* Texto em cinza mais claro para a data */
+  font-size: 10px; /* Diminuindo o tamanho da fonte para a data */
+}
+
+.notification-card button {
+  align-self: flex-start;
+  padding: 4px 8px; /* Reduzindo o tamanho do botão */
+  background-color: #9720ff;
+  color: white; /* Mantemos a cor branca no texto do botão */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px; /* Fonte menor no botão */
+}
+
+.notification-card button:hover {
+  background-color: #9720ff; /* Cor do botão ao passar o mouse */
+}
+
+.read {
+  background-color: #f7e0f1;  /* Cor verde claro para notificações lidas */
+}
+
+.unread {
+  background-color: #9720ff;  /* Cor roxa para notificações não lidas */
+  border-radius: 4px; /* Borda arredondada para notificações não lidas */
+}
+
+
+
 
 @media (max-width: 768px) {
   .navbar {
