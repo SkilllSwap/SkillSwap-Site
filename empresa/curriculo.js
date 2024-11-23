@@ -1,4 +1,4 @@
-import { db, doc, getDoc, deleteDoc, updateDoc, collection, addDoc, query, where, getDocs } from './firebaseConfig.js';
+import { db, doc, getDoc, updateDoc, arrayUnion, Timestamp, collection, query, where, getDocs, deleteDoc, addDoc, setDoc } from './firebaseConfig.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
   // Captura o usuarioId e o vagaId da URL
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const portfolioLink = document.getElementById("portfolio");
       if (portfolioLink) portfolioLink.href = curriculoData.PdfLink || "#";
 
-    
+      // Ações dos botões
       document.getElementById("aceitarBtn").addEventListener("click", () => aceitarCurriculo(usuarioId, vagaId));
       document.getElementById("guardarBtn").addEventListener("click", () => guardarCurriculo(usuarioId, vagaId));
       document.getElementById("excluirBtn").addEventListener("click", () => excluirCurriculo(usuarioId, vagaId));
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-// Funções para os botões de ação
+// Função para aceitar o currículo e adicionar uma notificação ao usuário
 async function aceitarCurriculo(usuarioId, vagaId) {
   try {
     const candidaturaRef = collection(db, "Candidatura");
@@ -57,9 +57,12 @@ async function aceitarCurriculo(usuarioId, vagaId) {
     if (!querySnapshot.empty) {
       const candidaturaDocRef = querySnapshot.docs[0].ref;
       await updateDoc(candidaturaDocRef, {
-        status: 'Aceito', // Atualiza o status para "Aceito"
-        dataAceitacao: new Date().toISOString() // Adiciona a data da aceitação
+        status: 'Aceito',
+        dataAceitacao: new Date().toISOString() 
       });
+
+      await adicionarNotificacao(usuarioId, vagaId); 
+
       alert("Currículo aceito com sucesso!");
     } else {
       alert("Candidatura não encontrada.");
@@ -70,12 +73,78 @@ async function aceitarCurriculo(usuarioId, vagaId) {
   }
 }
 
+async function adicionarNotificacao(usuarioId, vagaId) {
+  try {
+    // Buscar a vaga para obter o nome da empresa
+    const vagaRef = doc(db, "Vagas", vagaId);
+    const vagaDoc = await getDoc(vagaRef);
+
+    if (vagaDoc.exists()) {
+      const vagaData = vagaDoc.data();
+      const empresaId = vagaData.EmpresaID;
+
+      if (!empresaId) {
+        throw new Error("EmpresaID não encontrado na vaga.");
+      }
+
+      // Buscar a empresa para pegar o nome da empresa
+      const empresaRef = doc(db, "Empresa", empresaId);
+      const empresaDoc = await getDoc(empresaRef);
+
+      if (empresaDoc.exists()) {
+        const empresaNome = empresaDoc.data().nome;
+
+        if (!empresaNome) {
+          throw new Error("Nome da empresa não encontrado.");
+        }
+
+        // Verifica se o documento de notificações do usuário existe
+        const notificacoesRef = doc(db, "Notificacoes", usuarioId);
+        const notificacoesDoc = await getDoc(notificacoesRef);
+
+        if (notificacoesDoc.exists()) {
+          // Se o documento de notificações existe, usamos updateDoc para adicionar a notificação
+          await updateDoc(notificacoesRef, {
+            notificacoes: arrayUnion({
+              mensagem: `Sua candidatura para a vaga foi aceita pela empresa ${empresaNome}!`,
+              vagaId: vagaId, 
+              data: Timestamp.now(), 
+              lida: false 
+            })
+          });
+        } else {
+          // Se o documento de notificações não existe, criamos o documento com a nova notificação
+          await setDoc(notificacoesRef, {
+            notificacoes: [
+              {
+                mensagem: `Sua candidatura para a vaga foi aceita pela empresa ${empresaNome}!`,
+                vagaId: vagaId,
+                data: Timestamp.now(),
+                lida: false
+              }
+            ]
+          });
+        }
+
+        console.log("Notificação enviada com sucesso!");
+      } else {
+        throw new Error("Empresa não encontrada com o ID fornecido.");
+      }
+    } else {
+      throw new Error("Vaga não encontrada.");
+    }
+  } catch (error) {
+    console.error("Erro ao adicionar notificação:", error);
+    alert(`Erro ao adicionar notificação: ${error.message}`);
+  }
+}
+
+//guarda o currículo
 async function guardarCurriculo(usuarioId, vagaId) {
   try {
     await addDoc(collection(db, "CurriculosSalvos"), {
       usuarioId: usuarioId,
       vagaId: vagaId
-      
     });
     alert("Currículo guardado com sucesso!");
   } catch (error) {
@@ -84,6 +153,7 @@ async function guardarCurriculo(usuarioId, vagaId) {
   }
 }
 
+//exclui o currículo
 async function excluirCurriculo(usuarioId, vagaId) {
   try {
     const candidaturaRef = collection(db, "Candidatura");
@@ -92,7 +162,7 @@ async function excluirCurriculo(usuarioId, vagaId) {
 
     if (!querySnapshot.empty) {
       const candidaturaDocRef = querySnapshot.docs[0].ref;
-      await deleteDoc(candidaturaDocRef); // Exclui o currículo da candidatura
+      await deleteDoc(candidaturaDocRef); 
       alert("Currículo excluído com sucesso!");
       window.location.href = "./NomeCandidatos.html"; 
     } else {

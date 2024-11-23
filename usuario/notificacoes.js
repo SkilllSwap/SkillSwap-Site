@@ -1,4 +1,4 @@
-import { db, doc, getDoc, updateDoc, arrayUnion, onSnapshot, Timestamp } from './firebaseConfig.js';
+import { db, doc, getDoc, setDoc, arrayUnion, Timestamp, onSnapshot, collection, query, where } from './firebaseConfig.js';
 import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js';
 
 const auth = getAuth();
@@ -17,50 +17,85 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Monitora mudanças no status da candidatura
+//monitora mudanças no status da candidatura
 async function monitorarCandidaturas(userId) {
-  const candidaturaRef = doc(db, "Candidatura", userId);
+  const candidaturaRef = collection(db, "Candidatura"); 
 
-  // Escutando as mudanças no status da candidatura
-  onSnapshot(candidaturaRef, (docSnapshot) => {
-    if (docSnapshot.exists()) {
+  // Escuta as mudanças no status da candidatura
+  const q = query(candidaturaRef, where("Id_Usuario", "==", userId));  // Filtra pelas candidaturas do usuário
+  onSnapshot(q, (querySnapshot) => {
+    querySnapshot.forEach(docSnapshot => {
       const candidaturaData = docSnapshot.data();
       const status = candidaturaData.status;
-      const empresaId = candidaturaData.empresaId;
+      const vagaId = candidaturaData.Id_Vaga;
 
-      // Quando a candidatura for aceita, gerar a notificação
+      // Quando a candidatura for aceita, gera a notificação
       if (status === "Aceito") {
-        adicionarNotificacao(userId, `Sua candidatura foi aceita pela empresa ${empresaId}!`);
+        adicionarNotificacao(userId, vagaId);
       }
-    }
+    });
   });
 }
 
-// Adiciona a notificação ao Firestore
-async function adicionarNotificacao(userId, mensagem) {
+// Função para adicionar a notificação ao Firestore
+async function adicionarNotificacao(usuarioId, vagaId) {
   try {
-    const notificacoesRef = doc(db, "Notificacoes", userId);
+    // Busca a vaga para obter o nome da empresa
+    const vagaRef = doc(db, "Vagas", vagaId);
+    const vagaDoc = await getDoc(vagaRef);
 
-    // Adiciona a notificação no array de notificações
-    await updateDoc(notificacoesRef, {
-      notificacoes: arrayUnion({
-        mensagem: mensagem,
-        data: Timestamp.now(),
-        lida: false, // A notificação será lida mais tarde
-      }),
-    });
+    // Verifica se a vaga foi encontrada
+    if (vagaDoc.exists()) {
+      const vagaData = vagaDoc.data();
+      const empresaId = vagaData.EmpresaID;
 
-    console.log("Notificação adicionada com sucesso!");
+      console.log("EmpresaID encontrado na vaga:", empresaId); 
+
+      if (!empresaId) {
+        throw new Error("EmpresaID não encontrado na vaga.");
+      }
+
+      const empresaRef = doc(db, "Empresa", empresaId);
+      const empresaDoc = await getDoc(empresaRef);
+
+      // Verifica se a empresa foi encontrada
+      if (empresaDoc.exists()) {
+        const empresaNome = empresaDoc.data().nome;
+
+        if (!empresaNome) {
+          throw new Error("Nome da empresa não encontrado.");
+        }
+
+        // Adiciona a notificação ao usuário
+        const notificacoesRef = doc(db, "Notificacoes", usuarioId);
+
+        //setDoc para criar o documento de notificações, caso não exista
+        await setDoc(notificacoesRef, {
+          notificacoes: arrayUnion({
+            mensagem: `Sua candidatura para a vaga foi aceita pela empresa ${empresaNome}!`,
+            data: Timestamp.now(),
+            lida: false
+          })
+        }, { merge: true });  // atualizar ou criar o documento
+
+        console.log("Notificação enviada com sucesso!");
+      } else {
+        throw new Error("Empresa não encontrada com o ID fornecido.");
+      }
+    } else {
+      throw new Error("Vaga não encontrada.");
+    }
   } catch (error) {
     console.error("Erro ao adicionar notificação:", error);
+    alert(`Erro: ${error.message}`);
   }
 }
 
-// Carrega as notificações do usuário
+// Função para carregar e exibir as notificações do usuário
 async function carregarNotificacoes(userId) {
   const notificacoesRef = doc(db, "Notificacoes", userId);
 
-  // Escutando as notificações em tempo real
+  // ewscuta as notificações em tempo real
   onSnapshot(notificacoesRef, (docSnapshot) => {
     if (docSnapshot.exists()) {
       const data = docSnapshot.data();
@@ -73,10 +108,16 @@ async function carregarNotificacoes(userId) {
   });
 }
 
-// Exib as notificações na interface
+// Exibe as notificações na interface
 function exibirNotificacoes(notificacoes) {
   const notificationsList = document.getElementById("notificationsList");
-  notificationsList.innerHTML = "";
+
+  if (!notificationsList) {
+    console.error("Elemento 'notificationsList' não encontrado.");
+    return; 
+  }
+
+  notificationsList.innerHTML = ""; // Limpa as notificações
 
   if (notificacoes.length === 0) {
     notificationsList.innerHTML = "<li>Nenhuma notificação encontrada.</li>";
@@ -96,9 +137,9 @@ function exibirNotificacoes(notificacoes) {
 }
 
 // Marca uma notificação como lida
-async function marcarNotificacaoComoLida(userId, notificationIndex) {
+async function marcarNotificacaoComoLida(usuarioId, notificationIndex) {
   try {
-    const notificacoesRef = doc(db, "Notificacoes", userId);
+    const notificacoesRef = doc(db, "Notificacoes", usuarioId);
     const notificacoesDoc = await getDoc(notificacoesRef);
 
     if (notificacoesDoc.exists()) {
@@ -109,9 +150,9 @@ async function marcarNotificacaoComoLida(userId, notificationIndex) {
       notification.lida = true;
 
       // Atualiza a notificação
-      await updateDoc(notificacoesRef, {
+      await setDoc(notificacoesRef, {
         notificacoes: notifications
-      });
+      }, { merge: true }); 
 
       console.log("Notificação marcada como lida.");
     }
