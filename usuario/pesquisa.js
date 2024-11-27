@@ -1,78 +1,64 @@
-/*import { db } from './firebaseConfig.js'; 
-import { collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil - Skill Swap</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="logo-container">
+      <img src="../img/Logo-SkillSwap.png" alt="Logo" class="logo" />
+      <h2 class="name">Skill Swap</h2>
+    </div>
+    <ul class="nav-links">
+      <li><a href="./FeedVagas.html">Feed de Vagas</a></li>
+      <li><a href="./Pesquisa.html">Pesquisa</a></li>
+      <li><a href="./Notificações.html">Notificações</a></li>
+      <li><a href="./Perfil.html">Perfil</a></li>
+    </ul>
+  </div>
 
-async function pesquisarVagas() {
-  const input = document.getElementById("searchInput").value.trim().toLowerCase(); // Converte para minúsculas para comparação
-  console.log("Valor da pesquisa:", input);
+  <div class="profile-container">
+    <div class="profile-header">
+      <div class="profile-picture">
+        <img src="../img/perfil.png" alt="Foto de Perfil" id="profileImage">
+      </div>
+      <div class="profile-name">
+        <h1 id="userName">Nome do Usuário</h1>
+      </div>
+      <button id="editProfileBtn" class="edit-btn">Editar Perfil</button>
+    </div>
 
-  // Se o input estiver vazio, não faça a pesquisa
-  if (input === "") {
-    mostrarResultados([]);
-    return;
-  }
+    <div class="profile-info">
+      <div class="info-row">
+        <p><strong>Área de Atuação:</strong> 
+            <span id="areaAtuacao">Área de atuação não definida</span></p>
+      </div>
 
-  const vagasRef = collection(db, "Vagas");
+      <div class="info-row">
+        <p><strong>Contato:</strong> <span id="userEmail">Contato não definido</span></p>
+      </div>
 
-  // Consulta para buscar por Titulo ou Localizacao
-  const qTitulo = query(
-    vagasRef,
-    where("Titulo", ">=", input),
-    where("Titulo", "<=", input + '\uf8ff') // Pesquisa por prefixo no título
-  );
+      <div class="info-row">
+        <p><strong>Localização:</strong> <span id="localizacao">Localização não informada</span></p>
+      </div>
+    </div>
 
-  const qLocalizacao = query(
-    vagasRef,
-    where("Localizacao", ">=", input),
-    where("Localizacao", "<=", input + '\uf8ff') // Pesquisa por prefixo na localização
-  );
+    <div class="curriculo-btn-container">
+      <button class="curriculo-btn">Ver Currículo</button>
+    </div>
 
-  try {
-    const resultadosTitulo = await getDocs(qTitulo); // Executa a consulta para título
-    const resultadosLocalizacao = await getDocs(qLocalizacao); // Executa a consulta para localização
+    <div class="curriculo-content" id="curriculoContent" style="display: none;">
+      <h2>Currículo</h2>
+      <div id="curriculoInfo">
+        
+      </div>
+    </div>
+  </div>
 
-    const resultados = [];
-
-    // Adiciona os resultados encontrados por Titulo
-    resultadosTitulo.forEach(doc => {
-      resultados.push(doc.data());
-    });
-
-    // Adiciona os resultados encontrados por Localizacao (evita duplicatas)
-    resultadosLocalizacao.forEach(doc => {
-      const vaga = doc.data();
-      // Só adiciona se ainda não tiver sido adicionada pela consulta de Titulo
-      if (!resultados.some(r => r.Titulo === vaga.Titulo)) {
-        resultados.push(vaga);
-      }
-    });
-
-    mostrarResultados(resultados);
-  } catch (error) {
-    console.error("Erro ao buscar vagas:", error);
-    mostrarResultados([]);
-  }
-}
-
-// Mostra os resultados da pesquisa
-function mostrarResultados(resultados) {
-  const container = document.getElementById("card-container");
-  container.innerHTML = ''; // Limpa resultados anteriores
-
-  if (resultados.length === 0) {
-    container.innerHTML = "<p>Nenhuma vaga encontrada.</p>";
-  } else {
-    resultados.forEach(vaga => {
-      const card = document.createElement("div");
-      card.classList.add("vaga-card");
-      card.innerHTML = `
-        <h3>${vaga.Titulo}</h3>
-        <p><strong>Local:</strong> ${vaga.Localizacao}</p>
-        <p><strong>Salário:</strong> ${vaga.Salario}</p>
-      `;
-      container.appendChild(card);
-    });
-  }
-}
-
-// Função para o evento de pesquisa
-document.getElementById("searchInput").addEventListener("input", pesquisarVagas);*/
+  <script type="module" src="./firebaseConfig.js"></script>
+  <script type="module" src="perfil.js"></script>
+</body>
+</html>

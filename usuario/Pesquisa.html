@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pesquisa de Vagas - Skill Swap</title>
+  <title>Pesquisa de Vagas</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,7 +12,6 @@
       <img src="../img/Logo-SkillSwap.png" alt="Logo" class="logo" />
       <h2 class="name">Skill Swap</h2>
     </div>
-
     <ul class="nav-links">
       <li><a href="./FeedVagas.html">Feed de Vagas</a></li>
       <li><a href="./Pesquisa.html">Pesquisa</a></li>
@@ -21,21 +20,10 @@
     </ul>
   </div>
 
-  <div class="search-container">
-    <div class="title">Pesquisar Vagas</div>
-
-    <div class="form">
-      <div class="input-group">
-        <label for="searchInput">Título ou Localização</label>
-        <input type="text" id="searchInput" class="input" placeholder="Digite o título ou localização" oninput="pesquisarVagas()">
-      </div>
-    </div>
-
-    <div class="feed-container">
-      <div class="title">Resultados da Pesquisa</div>
-
-      <div class="card-container" id="card-container"></div>
-    </div>
+  <div class="profile-container">
+    <h2>Pesquisa de Vagas</h2>
+    <input type="text" id="searchInput" placeholder="Pesquisar vagas...">
+    <div id="card-container"></div>
   </div>
 
   <script type="module" src="firebaseConfig.js"></script>
