@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-//monitora mudanças no status da candidatura
+// Monitora mudanças no status da candidatura
 async function monitorarCandidaturas(userId) {
   const candidaturaRef = collection(db, "Candidatura"); 
 
@@ -49,8 +49,6 @@ async function adicionarNotificacao(usuarioId, vagaId) {
       const vagaData = vagaDoc.data();
       const empresaId = vagaData.EmpresaID;
 
-      console.log("EmpresaID encontrado na vaga:", empresaId); 
-
       if (!empresaId) {
         throw new Error("EmpresaID não encontrado na vaga.");
       }
@@ -69,14 +67,14 @@ async function adicionarNotificacao(usuarioId, vagaId) {
         // Adiciona a notificação ao usuário
         const notificacoesRef = doc(db, "Notificacoes", usuarioId);
 
-        //setDoc para criar o documento de notificações, caso não exista
+        // Cria o documento de notificações, caso não exista
         await setDoc(notificacoesRef, {
           notificacoes: arrayUnion({
             mensagem: `Sua candidatura para a vaga foi aceita pela empresa ${empresaNome}!`,
             data: Timestamp.now(),
             lida: false
           })
-        }, { merge: true });  // atualizar ou criar o documento
+        }, { merge: true });
 
         console.log("Notificação enviada com sucesso!");
       } else {
@@ -95,21 +93,21 @@ async function adicionarNotificacao(usuarioId, vagaId) {
 async function carregarNotificacoes(userId) {
   const notificacoesRef = doc(db, "Notificacoes", userId);
 
-  // ewscuta as notificações em tempo real
+  // Escuta as notificações em tempo real
   onSnapshot(notificacoesRef, (docSnapshot) => {
     if (docSnapshot.exists()) {
       const data = docSnapshot.data();
       const notificacoes = data.notificacoes || [];
 
-      exibirNotificacoes(notificacoes);
+      exibirNotificacoes(notificacoes, userId);
     } else {
-      exibirNotificacoes([]);
+      exibirNotificacoes([], userId);
     }
   });
 }
 
 // Carregar notificações e exibir na interface
-function exibirNotificacoes(notificacoes) {
+function exibirNotificacoes(notificacoes, userId) {
   const notificationsList = document.getElementById("notificationsList");
 
   if (!notificationsList) {
@@ -137,16 +135,15 @@ function exibirNotificacoes(notificacoes) {
 
     // Adicionar o evento de clique ao botão
     const button = notificationCard.querySelector(".mark-as-read");
-    button.addEventListener("click", () => marcarNotificacaoComoLida(notification.mensagem, index));
+    button.addEventListener("click", () => marcarNotificacaoComoLida(userId, notification.mensagem, index, button));
 
     notificationsList.appendChild(notificationCard);
   });
 }
 
 // Marcar a notificação como lida
-async function marcarNotificacaoComoLida(mensagem, notificationIndex) {
+async function marcarNotificacaoComoLida(usuarioId, mensagem, notificationIndex, button) {
   try {
-    const usuarioId = "seu_usuario_id_aqui";  // Certifique-se de passar o ID correto do usuário
     const notificacoesRef = doc(db, "Notificacoes", usuarioId);
     const notificacoesDoc = await getDoc(notificacoesRef);
 
@@ -157,13 +154,17 @@ async function marcarNotificacaoComoLida(mensagem, notificationIndex) {
       // Marca a notificação como lida
       notification.lida = true;
 
-      // Atualiza as notificações
+      // Atualiza as notificações no Firestore
       await setDoc(notificacoesRef, {
         notificacoes: notifications
       }, { merge: true });
 
       console.log("Notificação marcada como lida.");
-      
+
+      // Desabilita o botão na interface e marca a notificação como lida visualmente
+      button.disabled = true;
+      button.closest('li').classList.add('read');  // Marca a notificação como lida visualmente
+
       // Atualiza as notificações na interface
       carregarNotificacoes(usuarioId);
     }
@@ -171,4 +172,3 @@ async function marcarNotificacaoComoLida(mensagem, notificationIndex) {
     console.error("Erro ao marcar notificação como lida:", error);
   }
 }
-

@@ -195,15 +195,20 @@ body {
 
 .info-row {
   display: flex;
-  align-items: center;
+  align-items: center;  /* Alinha os itens verticalmente no centro */
   margin-bottom: 10px;
+  justify-content: flex-start;  /* Garante que os itens fiquem alinhados à esquerda */
+}
+
+.info-row i {
+  font-size: 20px;  /* Ajuste o tamanho do ícone, se necessário */
+  margin-right: 10px;  /* Espaço entre o ícone e o texto */
 }
 
 .info-text {
   color: #fff;
-  margin-left: 10px;
   font-size: 16px;
-  text-align: left;
+  text-align: left;  /* Garante que o texto seja alinhado à esquerda */
 }
 
 .description {
@@ -553,7 +558,7 @@ input[type="text"] {
 
 .notification-card button {
   align-self: flex-start;
-  padding: 4px 8px; /* Reduzindo o tamanho do botão */
+  padding: 4px 8px;
   background-color: #9720ff;
   color: white; /* Mantemos a cor branca no texto do botão */
   border: none;
