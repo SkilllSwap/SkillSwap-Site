@@ -519,6 +519,31 @@ input[type="text"] {
   font-size: 16px;
 }
 
+
+.curriculo-content {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #7801ff62;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#curriculoInfo p {
+  font-size: 16px;
+  color: #ffffff;
+  margin-bottom: 10px;
+  align-items: right;
+}
+
+#curriculoInfo a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+#curriculoInfo a:hover {
+  text-decoration: underline;
+}
+
 .curriculo-btn:hover {
   background-color: #5500cc;
 }
