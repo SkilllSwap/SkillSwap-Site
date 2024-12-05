@@ -163,12 +163,12 @@ body {
   left: -100px;
 }
 
-a#canditar-link{
+#canditar-link{
   display: block;
   width: inherit;
 }
 
-a#canditar-link .button{
+#canditar-link .button{
   width: 70%;
   margin: 20px 15% auto 15%;
 }
