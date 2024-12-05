@@ -261,16 +261,15 @@ a#canditar-link .button{
 
 .input,
 select {
-  width: 100%;
-  max-width: 500px;
+  width: 75%;
+  /*max-width: 500px;*/
   padding: 12px;
-  margin: 10px 0;
+  margin: 10px 13% 10px 12%;
   border-radius: 10px;
   border: 1px solid #ffffff;
   background-color: #333333;
   color: #fff;
   font-size: 16px;
-  align-items: center;
 }
 
 .input:focus,
@@ -625,7 +624,7 @@ input[type="text"] {
 
   .feed-container {
     width: 90%;
-    padding: 10px;
+    padding: 24px;
   }
 
   .input,
