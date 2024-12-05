@@ -163,6 +163,16 @@ body {
   left: -100px;
 }
 
+a#canditar-link{
+  display: block;
+  width: inherit;
+}
+
+a#canditar-link .button{
+  width: 70%;
+  margin: 20px 15% auto 15%;
+}
+
 .nav-button-next {
   position: absolute;
   right: -100px;
