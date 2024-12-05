@@ -195,9 +195,9 @@ body {
 
 .info-row {
   display: flex;
-  align-items: center;  /* Alinha os itens verticalmente no centro */
+  align-items: center;
   margin-bottom: 10px;
-  justify-content: flex-start;  /* Garante que os itens fiquem alinhados à esquerda */
+ 
 }
 
 .info-row i {
